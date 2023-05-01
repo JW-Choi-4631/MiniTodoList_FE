@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# 과제 목적
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. 과제 1에서 props 및 useState()를 이용하여 Todo List 추가 및 완료상태 변경 기능을 redux를 이용하여 적용해보기
+2. Update 기능 추가
+3. react-router-dom 사용하여 페이지 분할 
+4. styled-components 사용하여 css-in-js 사용하기 
 
-## Available Scripts
+## 구현해야할 기능
 
-In the project directory, you can run:
+1. Create ToDo 
+2. Read Todos, Todo
+3. Update Todo
+4. Delete Todo
 
-### `yarn start`
+### 사용 tool
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. 상태(state)관리툴 : redux, react-redux
+2. react-router-dom
+3. styled-components
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### 추가 기능 
 
-### `yarn test`
+1. 날짜 입력용 input 추가
+-> Todo List가 생성된 시간과 입력된 목표 시간의 차이로 남은 기간 계산
+2. 폰트 적용
+3. 진행 중 page와 완료 page react-router-dom으로 분할
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### 발생한 문제점
 
-### `yarn build`
+1. context module 생성 후 dispatch로 state 변경 중 값 입력되지 않는 현상 발생
+-> 확인 해보니 다른 module(Card module)에서 import 해오는 것 확인 , 수정
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. input 에서 date 값 받아와 계산 중 오류 발생
+-> input으로 들어온 date는 string값임, 따라서 new Date()로 Date객체 생성 후 계산 실행
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. delete 기능 구현 중 해당 id뿐만 아니라 다른 id의 Card 전부 삭제되는 현상 발생
+-> reducer에서 return 시 filter 이용하여 새로운 배열(newCardList)을 생성하여 [newCardList] 형태로 return하여 발생한 현상, newCardList만 return하도록 수정 
+   (filter으로 만들어진 것은 이미 배열 객체이다. 배열 객체에 다시 배열을 씌워 2차원 배열 형태로 만들어 return 하여 발생한 현상)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
