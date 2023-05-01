@@ -59,6 +59,15 @@ function Home() {
     })
   };
 
+  const deleteBtnClickHandler = (id) => {
+    console.log(id);
+    console.log(typeof(id));
+    dispatch({
+      type: 'delete',
+      payLoad: id,
+    })
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -88,8 +97,9 @@ function Home() {
           <Container>
           {card.map((card) => {
             if (card.isDone === false) {
-              return <CardOne key={card.id} card={card}/>
+              return <CardOne deleteBtnClick={deleteBtnClickHandler} key={card.id} card={card}/>
             }
+            return null;
           }
           )}
           </Container>

@@ -15,11 +15,11 @@ const CardBox = styled.div`
   font-weight : Bold;
 `
 
-function CardOne({card}) {
+function CardOne({deleteBtnClick, card}) {
 
-  const title = card.title;
-  const context = card.context;
-  const date = card.date;
+  console.log(card);
+
+  const {title, context, date, id} = card;
 
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ function CardOne({card}) {
         margin: 'auto auto 0 auto',
         gap : 10,
       }}>
-        <button>취소</button>
+        <button onClick={() => deleteBtnClick(id)}>삭제</button>
         <button>{completeBtnContext}</button>
         <button onClick={() => {
           navigate('/detail');
