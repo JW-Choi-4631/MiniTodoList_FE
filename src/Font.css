@@ -1,0 +1,13 @@
+@font-face {
+	font-family: 'Gaegu';
+    font-style: normal;
+    font-weight: 400;
+	src: url(./assets/font/Gaegu/Gaegu-Regular.ttf);
+}
+
+@font-face {
+	font-family: 'Gaegu';
+    font-style: Bold;
+    font-weight: 700;
+	src: url(./assets/font/Gaegu/Gaegu-Bold.ttf);
+}

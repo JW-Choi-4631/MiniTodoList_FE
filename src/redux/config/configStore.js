@@ -1,9 +1,9 @@
 import { createStore } from "redux";
 import { combineReducers } from "redux";
-import Context from "../modules/Context";
+import Card from "../modules/Card";
 
 const rootReducer = combineReducers({
-    Context,
+    Card,
 });
 
 const store = createStore(rootReducer);
