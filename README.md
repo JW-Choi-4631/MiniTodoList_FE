@@ -5,27 +5,27 @@
 3. react-router-dom 사용하여 페이지 분할 
 4. styled-components 사용하여 css-in-js 사용하기 
 
-## 구현해야할 기능
+# 구현해야할 기능
 
 1. Create ToDo 
 2. Read Todos, Todo
 3. Update Todo
 4. Delete Todo
 
-### 사용 tool
+# 사용 tool
 
 1. 상태(state)관리툴 : redux, react-redux
 2. react-router-dom
 3. styled-components
 
-#### 추가 기능 
+# 추가 기능 
 
 1. 날짜 입력용 input 추가
 -> Todo List가 생성된 시간과 입력된 목표 시간의 차이로 남은 기간 계산
 2. 폰트 적용
 3. 진행 중 page와 완료 page react-router-dom으로 분할
 
-##### 발생한 문제점
+# 발생한 문제점
 
 1. context module 생성 후 dispatch로 state 변경 중 값 입력되지 않는 현상 발생
 -> 확인 해보니 다른 module(Card module)에서 import 해오는 것 확인 , 수정
