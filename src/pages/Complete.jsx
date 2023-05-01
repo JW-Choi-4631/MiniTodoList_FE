@@ -1,8 +1,50 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
+import CardOne from '../components/CardOne';
 
 function Complete() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const cardList = useSelector(state=> state.Card);
+
+  const deleteBtnClickHandler = (id) => {
+    dispatch({
+      type: 'delete',
+      payLoad: id,
+    })
+  };
+
+  const changeIsDoneHandler = (id) => {
+    dispatch({
+      type : 'complete',
+      payLoad : id,
+    })
+  }
+
   return (
-    <div>Complete</div>
+    <>
+    <h1>Complete</h1>
+    <div style={{
+      display : 'flex',
+      gap : 20,
+    }}>
+      {cardList.map((card)=>{
+        if(card.isDone === true){
+          return (
+            <CardOne key = {card.id} deleteBtnClick = {deleteBtnClickHandler} changeBtnClick={changeIsDoneHandler} card={card}/>
+            )
+        }
+        return null;
+      })}
+      </div>
+      <button onClick={()=>{
+        navigate('/');
+      }}>Go To Home</button>
+    
+    </>
+    
   )
 }
 

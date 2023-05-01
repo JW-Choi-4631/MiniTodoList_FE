@@ -35,7 +35,7 @@ function CardOne({deleteBtnClick, changeBtnClick, card}) {
         <button onClick={() => deleteBtnClick(id)}>삭제</button>
         <button onClick={() => changeBtnClick(id)}>{completeBtnContext}</button>
         <button onClick={() => {
-          navigate('/detail');
+          navigate(`/detail/${id}`);
         }}>상세보기</button>
       </div>
       <div style={{
