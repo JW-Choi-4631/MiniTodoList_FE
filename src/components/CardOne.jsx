@@ -19,6 +19,7 @@ function CardOne({card}) {
 
   const title = card.title;
   const context = card.context;
+  const date = card.date;
 
   const navigate = useNavigate();
 
@@ -44,7 +45,9 @@ function CardOne({card}) {
         margin: '0 auto',
         textAlign : 'center',
       }}>
-        남은시간 : mm.dd
+        <span style={{
+          fontSize : 13,
+        }}>남은시간 : {date}</span>
       </div>
     </CardBox>
   )

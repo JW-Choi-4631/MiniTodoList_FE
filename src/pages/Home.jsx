@@ -24,7 +24,8 @@ function Home() {
 
   const [saveContext, setSaveContext] = useState({
     title: '',
-    context: ''
+    context: '',
+    date : '',
   })
 
   const card = useSelector((state) => {
@@ -37,10 +38,17 @@ function Home() {
 
   const contextChangeHandler = (event) => {
     let inputname = event.target.name;
-    if (inputname === 'titleInput') {
-      setSaveContext({ ...saveContext, title: event.target.value })
-    } else {
-      setSaveContext({ ...saveContext, context: event.target.value })
+    switch (inputname) {
+      case 'titleInput':
+        setSaveContext({ ...saveContext, title: event.target.value })
+        break;
+      case 'contextInput':
+        setSaveContext({ ...saveContext, context: event.target.value })
+        break;
+      case 'dateInput':
+        let date = new Date()
+        setSaveContext({ ...saveContext, date: event.target.value})
+        break;
     }
   };
 
@@ -60,11 +68,11 @@ function Home() {
             <label>제목</label>
             <input name='titleInput' onChange={contextChangeHandler} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
             <label>기한 날짜</label>
-            <input type="date" />
+            <input name='dateInput' onChange={contextChangeHandler} type="date" />
           </InputContainer>
           <InputContainer className='inputContext'>
             <label>상세 내역</label>
-            <textarea onChange={contextChangeHandler} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
+            <textarea name='contextInput' onChange={contextChangeHandler} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
           </InputContainer>
           <InputContainer className='buttonBox'>
             <button onClick={saveBtnClickHandler}> 저장하기 </button>
