@@ -22,6 +22,18 @@ const Card = (state = initialState, action) => {
         case 'delete':
             const newCardList = state.filter(card => card.id !== action.payLoad);
             return newCardList;
+        case 'complete':
+            const ChangeCardList = state.map((card)=>{
+                if(card.id === action.payLoad){
+                    console.log(card.id);
+                    console.log(action.payLoad);
+                    return {...card, isDone: card.isDone? false:true}
+                } else {
+                    return card;
+                }
+            })
+            console.log(ChangeCardList);
+            return ChangeCardList;
         default:
             return state;
     }

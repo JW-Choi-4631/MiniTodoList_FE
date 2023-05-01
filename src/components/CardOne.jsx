@@ -15,7 +15,7 @@ const CardBox = styled.div`
   font-weight : Bold;
 `
 
-function CardOne({deleteBtnClick, card}) {
+function CardOne({deleteBtnClick, changeBtnClick, card}) {
 
   const {title, context, date, id} = card;
 
@@ -25,7 +25,7 @@ function CardOne({deleteBtnClick, card}) {
 
   return (
     <CardBox>
-      <h3>제목 : {title}</h3>
+      <p>제목 : {title}</p>
       <p> 본문 : {context}</p>
       <div style={{
         display : 'flex',
@@ -33,7 +33,7 @@ function CardOne({deleteBtnClick, card}) {
         gap : 10,
       }}>
         <button onClick={() => deleteBtnClick(id)}>삭제</button>
-        <button>{completeBtnContext}</button>
+        <button onClick={() => changeBtnClick(id)}>{completeBtnContext}</button>
         <button onClick={() => {
           navigate('/detail');
         }}>상세보기</button>

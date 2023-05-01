@@ -4,7 +4,6 @@ import styled from "styled-components";
 import GlobalStyle from "../components/GlobalStyle"
 import '../App.css'
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import CardOne from '../components/CardOne';
 
 const Container = styled.div`
@@ -22,14 +21,12 @@ const InputContainer = styled.div`
 
 function Home() {
 
-  const [saveContext, setSaveContext] = useState({
-    title: '',
-    context: '',
-    date : '',
-  })
-
   const card = useSelector((state) => {
-    return state.Card
+    return state.Card;
+  });
+
+  const Context = useSelector((state) => {
+    return state.saveContext;
   });
 
   const dispatch = useDispatch();
@@ -40,14 +37,22 @@ function Home() {
     let inputname = event.target.name;
     switch (inputname) {
       case 'titleInput':
-        setSaveContext({ ...saveContext, title: event.target.value })
+        dispatch({ 
+          type : 'title',
+          payLoad : event.target.value,
+        })
         break;
       case 'contextInput':
-        setSaveContext({ ...saveContext, context: event.target.value })
+        dispatch({ 
+          type : 'context',
+          payLoad : event.target.value,
+        })
         break;
       case 'dateInput':
-        let date = new Date()
-        setSaveContext({ ...saveContext, date: event.target.value})
+        dispatch({ 
+          type : 'date',
+          payLoad : event.target.value,
+        })
         break;
     }
   };
@@ -55,7 +60,15 @@ function Home() {
   const saveBtnClickHandler = () => {
     dispatch({
       type: 'save',
-      payLoad: saveContext
+      payLoad: Context
+    })
+    dispatch({
+      type : 'clear',
+      payLoad: {
+        title:'',
+        date:'',
+        context:'',
+      }
     })
   };
 
@@ -66,6 +79,13 @@ function Home() {
     })
   };
 
+  const changeIsDoneHandler = (id) => {
+    dispatch({
+      type : 'complete',
+      payLoad : id,
+    })
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -73,13 +93,13 @@ function Home() {
         <div className="save-Box">
           <InputContainer className="inputTitle">
             <label>제목</label>
-            <input name='titleInput' onChange={contextChangeHandler} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
+            <input name='titleInput' onChange={contextChangeHandler} value={Context.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
             <label>기한 날짜</label>
-            <input name='dateInput' onChange={contextChangeHandler} type="date" />
+            <input name='dateInput' value = {Context.date} onChange={contextChangeHandler} type="date" />
           </InputContainer>
           <InputContainer className='inputContext'>
             <label>상세 내역</label>
-            <textarea name='contextInput' onChange={contextChangeHandler} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
+            <textarea name='contextInput' value = {Context.context} onChange={contextChangeHandler} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
           </InputContainer>
           <InputContainer className='buttonBox'>
             <button onClick={saveBtnClickHandler}> 저장하기 </button>
@@ -95,7 +115,7 @@ function Home() {
           <Container>
           {card.map((card) => {
             if (card.isDone === false) {
-              return <CardOne deleteBtnClick={deleteBtnClickHandler} key={card.id} card={card}/>
+              return <CardOne deleteBtnClick={deleteBtnClickHandler} changeBtnClick={changeIsDoneHandler} key={card.id} card={card}/>
             }
             return null;
           }

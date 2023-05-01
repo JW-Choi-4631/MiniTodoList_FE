@@ -1,8 +1,10 @@
 import React from 'react'
+import Home from './Home'
 
 function Detail() {
   return (
-    <div>Detail</div>
+    <div>
+    </div>
   )
 }
 
