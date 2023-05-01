@@ -7,7 +7,6 @@ const Card = (state = initialState, action) => {
 
     switch (action.type) {
         case 'save':
-            console.log('createdcard.id=>',createDate + random);
             const diff = new Date(action.payLoad.date) - createDate;
             const diffDay = Math.floor(diff / (1000*60*60*24));
             const diffHour = Math.floor((diff / (1000*60*60)) % 24);
@@ -21,11 +20,7 @@ const Card = (state = initialState, action) => {
                 isDone : false,
             }];
         case 'delete':
-            console.log('deletepayLoad.id=>',action.payLoad);
-            const newCardList = state.filter(card => {
-                console.log('card.id=>',card.id);
-                return card.id !== action.payLoad});
-                console.log('newCard=>',newCardList);
+            const newCardList = state.filter(card => card.id !== action.payLoad);
             return newCardList;
         default:
             return state;

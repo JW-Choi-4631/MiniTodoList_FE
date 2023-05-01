@@ -60,8 +60,6 @@ function Home() {
   };
 
   const deleteBtnClickHandler = (id) => {
-    console.log(id);
-    console.log(typeof(id));
     dispatch({
       type: 'delete',
       payLoad: id,

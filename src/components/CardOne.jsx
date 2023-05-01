@@ -17,8 +17,6 @@ const CardBox = styled.div`
 
 function CardOne({deleteBtnClick, card}) {
 
-  console.log(card);
-
   const {title, context, date, id} = card;
 
   const navigate = useNavigate();
