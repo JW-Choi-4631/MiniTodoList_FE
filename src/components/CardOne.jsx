@@ -23,6 +23,9 @@ function CardOne({deleteBtnClick, changeBtnClick, card}) {
 
   const completeBtnContext = card.isDone? '취소':'완료';
 
+  const hiddenStyle = card.isDone === true? {display:'none',}:{visibility:'visible',};
+  
+
   return (
     <CardBox>
       <p>제목 : {title}</p>
@@ -34,7 +37,7 @@ function CardOne({deleteBtnClick, changeBtnClick, card}) {
       }}>
         <button onClick={() => deleteBtnClick(id)}>삭제</button>
         <button onClick={() => changeBtnClick(id)}>{completeBtnContext}</button>
-        <button onClick={() => {
+        <button style={hiddenStyle} onClick={() => {
           navigate(`/detail/${id}`);
         }}>상세보기</button>
       </div>
@@ -43,9 +46,9 @@ function CardOne({deleteBtnClick, changeBtnClick, card}) {
         margin: '0 auto',
         textAlign : 'center',
       }}>
-        <span style={{
-          fontSize : 13,
-        }}>남은시간 : {date}</span>
+        <span style={
+          {...hiddenStyle,fontSize : 13}
+        }>남은시간 : {date}</span>
       </div>
     </CardBox>
   )

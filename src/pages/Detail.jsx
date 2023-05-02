@@ -1,25 +1,77 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
-import Home from './Home'
 
 function Detail() {
 
   const navigate = useNavigate();
-  const cardList = useSelector(state=> state.Card);
+  const cardList = useSelector(state => state.Card);
+  const Context = useSelector(state => state.SaveContext);
+  const dispatch = useDispatch();
   const params = useParams();
-  const foundCard = cardList.find((card)=> {
+  const foundCard = cardList.find((card) => {
     return card.id === params.id
   });
 
+  const contextChangeHandler = (event) => {
+    let inputname = event.target.name;
+    switch (inputname) {
+      case 'titleInput':
+        dispatch({
+          type: 'title',
+          payLoad: event.target.value,
+        })
+        break;
+      case 'contextInput':
+        dispatch({
+          type: 'context',
+          payLoad: event.target.value,
+        })
+        break;
+      case 'dateInput':
+        dispatch({
+          type: 'date',
+          payLoad: event.target.value,
+        })
+        break;
+    }
+  };
+
+  const changeBtnClickHandler = () => {
+    dispatch({
+      type: 'change',
+      payLoad: {
+        id: params.id,
+        title: Context.title,
+        context: Context.context,
+        date: Context.date,
+        isDone: false,
+      }
+    })
+    dispatch({
+      type: 'clear',
+      payLoad: {
+        title: '',
+        date: '',
+        context: '',
+      }
+    })
+
+    navigate('/');
+  }
+
+
   return (
     <div>
-      <h1>제목 : {foundCard.title}</h1>
-      <p> 본문 : {foundCard.context}</p>
+      제목 : <input name='titleInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.title} />
+      <br />
+      본문 : <textarea name='contextInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.context} />
+      <br />
+      <input name='dateInput' type='date' onChange={contextChangeHandler} />
       <p> D-Day : {foundCard.date}</p>
-      <button>수정하기</button>
+      <button onClick={changeBtnClickHandler}>수정하기</button>
       &nbsp;&nbsp;&nbsp;
-      <button onClick={()=>{
+      <button onClick={() => {
         navigate('/');
       }}>Go To Home</button>
     </div>

@@ -26,7 +26,7 @@ function Home() {
   });
 
   const Context = useSelector((state) => {
-    return state.saveContext;
+    return state.SaveContext;
   });
 
   const dispatch = useDispatch();

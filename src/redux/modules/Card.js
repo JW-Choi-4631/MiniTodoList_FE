@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+
 const initialState = [];
 
 const Card = (state = initialState, action) => {
@@ -7,11 +9,11 @@ const Card = (state = initialState, action) => {
 
     switch (action.type) {
         case 'save':
-            const diff = new Date(action.payLoad.date) - createDate;
-            const diffDay = Math.floor(diff / (1000*60*60*24));
-            const diffHour = Math.floor((diff / (1000*60*60)) % 24);
-            const diffMin = Math.floor((diff / (1000*60)) % 60);
-            const diffSec = Math.floor(diff / 1000 % 60);
+            let diff = new Date(action.payLoad.date) - createDate;
+            let diffDay = Math.floor(diff / (1000*60*60*24));
+            let diffHour = Math.floor((diff / (1000*60*60)) % 24);
+            let diffMin = Math.floor((diff / (1000*60)) % 60);
+            let diffSec = Math.floor(diff / 1000 % 60);
             return [...state, {
                 id : createDate + random,
                 title : action.payLoad.title,
@@ -23,14 +25,18 @@ const Card = (state = initialState, action) => {
             const newCardList = state.filter(card => card.id !== action.payLoad);
             return newCardList;
         case 'complete':
-            const ChangeCardList = state.map((card)=>{
+            const completeCardList = state.map((card)=>{
                 if(card.id === action.payLoad){
                     return {...card, isDone: card.isDone? false:true}
                 } else {
                     return card;
                 }
             })
-            return ChangeCardList;
+            return completeCardList;
+        case 'change':
+            const changeCardList = state.filter(card => card.id !== action.payLoad.id);
+            const testArr = [...changeCardList, action.payLoad]
+            return testArr;
         default:
             return state;
     }
