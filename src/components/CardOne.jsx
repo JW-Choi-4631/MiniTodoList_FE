@@ -48,7 +48,7 @@ function CardOne({deleteBtnClick, changeBtnClick, card}) {
       }}>
         <span style={
           {...hiddenStyle,fontSize : 13}
-        }>남은시간 : {date}</span>
+        }>Due Date : {date}</span>
       </div>
     </CardBox>
   )

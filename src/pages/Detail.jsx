@@ -1,6 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
+import CardOne from '../components/CardOne';
+import GlobalStyle from '../components/GlobalStyle';
 
 function Detail() {
 
@@ -62,19 +64,27 @@ function Detail() {
 
 
   return (
+    <>
+    <GlobalStyle />
     <div>
-      제목 : <input name='titleInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.title} />
-      <br />
-      본문 : <textarea name='contextInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.context} />
-      <br />
-      <input name='dateInput' type='date' onChange={contextChangeHandler} />
-      <p> D-Day : {foundCard.date}</p>
-      <button onClick={changeBtnClickHandler}>수정하기</button>
-      &nbsp;&nbsp;&nbsp;
-      <button onClick={() => {
-        navigate('/');
-      }}>Go To Home</button>
+      <div>
+
+      </div>
+      <div>
+        제목 : <input name='titleInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.title} />
+        <br />
+        본문 : <textarea name='contextInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.context} />
+        <br />
+        <input name='dateInput' type='date' onChange={contextChangeHandler} />
+        <p> D-Day : {foundCard.date}</p>
+        <button onClick={changeBtnClickHandler}>수정하기</button>
+        &nbsp;&nbsp;&nbsp;
+        <button onClick={() => {
+          navigate('/');
+        }}>Go To Home</button>
+      </div>
     </div>
+    </>
   )
 }
 

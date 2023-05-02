@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import CardOne from '../components/CardOne';
+import GlobalStyle from '../components/GlobalStyle';
 
 function Complete() {
 
@@ -25,6 +26,7 @@ function Complete() {
 
   return (
     <>
+    <GlobalStyle />
     <h1>Complete</h1>
     <div style={{
       display : 'flex',
