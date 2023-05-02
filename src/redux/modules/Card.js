@@ -4,7 +4,7 @@ const initialState = [];
 
 const Card = (state = initialState, action) => {
 
-    const createDate = new Date();
+    const createDate = Date.now();
     const random = Math.random();
 
     switch (action.type) {

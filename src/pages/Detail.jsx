@@ -12,7 +12,7 @@ function Detail() {
   const dispatch = useDispatch();
   const params = useParams();
   const foundCard = cardList.find((card) => {
-    return card.id === params.id
+    return card.id === Number(params.id)
   });
 
   const contextChangeHandler = (event) => {
@@ -39,6 +39,18 @@ function Detail() {
     }
   };
 
+  const whenPageMovedInputValueClear = (page)=>{
+    dispatch({
+      type: 'clear',
+      payLoad: {
+        title: '',
+        date: '',
+        context: '',
+      }
+    })
+    navigate(`${page}`);
+  }
+
   const changeBtnClickHandler = () => {
     dispatch({
       type: 'change',
@@ -50,16 +62,7 @@ function Detail() {
         isDone: false,
       }
     })
-    dispatch({
-      type: 'clear',
-      payLoad: {
-        title: '',
-        date: '',
-        context: '',
-      }
-    })
-
-    navigate('/');
+    whenPageMovedInputValueClear('/');
   }
 
 
@@ -71,6 +74,7 @@ function Detail() {
 
       </div>
       <div>
+        <p>ID : {foundCard.id}</p>
         제목 : <input name='titleInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.title} />
         <br />
         본문 : <textarea name='contextInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.context} />
@@ -80,8 +84,8 @@ function Detail() {
         <button onClick={changeBtnClickHandler}>수정하기</button>
         &nbsp;&nbsp;&nbsp;
         <button onClick={() => {
-          navigate('/');
-        }}>Go To Home</button>
+          whenPageMovedInputValueClear('/');
+        }}>이전으로</button>
       </div>
     </div>
     </>
