@@ -15,7 +15,7 @@ const Card = (state = initialState, action) => {
             // let diffMin = Math.floor((diff / (1000*60)) % 60);
             // let diffSec = Math.floor(diff / 1000 % 60);
             return [...state, {
-                id : createDate + random,
+                id : (createDate + random).toString(),
                 title : action.payLoad.title,
                 context : action.payLoad.context,
                 date : action.payLoad.date,//`${diffDay}일 ${diffHour}시 ${diffMin}분 ${diffSec}초`

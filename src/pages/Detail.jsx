@@ -12,7 +12,7 @@ function Detail() {
   const dispatch = useDispatch();
   const params = useParams();
   const foundCard = cardList.find((card) => {
-    return card.id === Number(params.id)
+    return card.id === params.id
   });
 
   const contextChangeHandler = (event) => {
