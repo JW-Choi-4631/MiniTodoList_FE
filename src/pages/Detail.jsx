@@ -54,6 +54,8 @@ function Detail() {
           payLoad: event.target.value,
         })
         break;
+      default:
+          break;
     }
   };
 

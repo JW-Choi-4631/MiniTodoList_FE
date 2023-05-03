@@ -1,5 +1,3 @@
-import { useDispatch } from "react-redux";
-
 const initialState = [];
 
 const Card = (state = initialState, action) => {
