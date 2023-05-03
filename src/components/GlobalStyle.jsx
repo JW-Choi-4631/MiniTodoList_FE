@@ -12,11 +12,11 @@ const GlobalStyle = createGlobalStyle`
         border : 1px black solid;
     } */
 
-    /* body {
+    body {
         background-image:url('https://cms.boardmix.com/images/kr/articles/2022/skills/todolist02.png');
         background-size : 130%;
-        background-repeat : no-repeat;
-    } */
+        background-repeat : repeat;
+    }
 
     .App {
         max-width : 1200px;

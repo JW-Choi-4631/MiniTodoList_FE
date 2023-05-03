@@ -44,21 +44,21 @@ function Home() {
     let inputname = event.target.name;
     switch (inputname) {
       case 'titleInput':
-        dispatch({ 
-          type : 'title',
-          payLoad : event.target.value,
+        dispatch({
+          type: 'title',
+          payLoad: event.target.value,
         })
         break;
       case 'contextInput':
-        dispatch({ 
-          type : 'context',
-          payLoad : event.target.value,
+        dispatch({
+          type: 'context',
+          payLoad: event.target.value,
         })
         break;
       case 'dateInput':
-        dispatch({ 
-          type : 'date',
-          payLoad : event.target.value,
+        dispatch({
+          type: 'date',
+          payLoad: event.target.value,
         })
         break;
     }
@@ -70,28 +70,22 @@ function Home() {
       payLoad: Content,
     })
     dispatch({
-      type : 'clear',
+      type: 'clear',
       payLoad: {
-        title:'',
-        date:'',
-        context:'',
+        title: '',
+        date: '',
+        context: '',
       }
     })
   };
   // Complete Page와 중복되는 함수
-  const deleteBtnClickHandler = (id) => {
+  const BtnClickHandler = (event, id) => {
+    const type = event.target.name === 'deleteBtn' ? 'delete' : 'complete';
     dispatch({
-      type: 'delete',
+      type,
       payLoad: id,
     })
   };
-  // Complete Page와 중복되는 함수
-  const changeIsDoneHandler = (id) => {
-    dispatch({
-      type : 'complete',
-      payLoad : id,
-    })
-  }
 
   return (
     <>
@@ -100,13 +94,13 @@ function Home() {
         <div className="save-Box">
           <InputContainer className="inputTitle">
             <label>제목</label>
-            <input name='titleInput' onChange = {contentChangeHandler} value={Content.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)'  />
+            <input name='titleInput' onChange={contentChangeHandler} value={Content.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
             <label>기한 날짜</label>
-            <input name='dateInput' onChange = {contentChangeHandler} type="date" />
+            <input name='dateInput' onChange={contentChangeHandler} type="date" />
           </InputContainer>
           <InputContainer className='inputContext'>
             <label>상세 내역</label>
-            <textarea name='contextInput' onChange = {contentChangeHandler} value={Content.context} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
+            <textarea name='contextInput' onChange={contentChangeHandler} value={Content.context} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
           </InputContainer>
           <InputContainer className='buttonBox'>
             <button onClick={saveBtnClickHandler}> 저장하기 </button>
@@ -117,16 +111,16 @@ function Home() {
             color: 'red',
           }}>🕐 해야할 일</button>
           <button onClick={() => {
-              navigate('/complete')
-            }}>🎉완료 List</button>
+            navigate('/complete')
+          }}>🎉완료 List</button>
           <Container>
-          {card.map((card) => {
-            if (card.isDone === false) {
-              return <CardOne deleteBtnClick={deleteBtnClickHandler} changeBtnClick={changeIsDoneHandler} key={card.id} card={card}/>
+            {card.map((card) => {
+              if (card.isDone === false) {
+                return <CardOne BtnClick={BtnClickHandler} key={card.id} card={card} />
+              }
+              return null;
             }
-            return null;
-          }
-          )}
+            )}
           </Container>
         </div>
       </div>

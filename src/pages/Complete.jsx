@@ -9,10 +9,10 @@ function Complete() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const card = useSelector(state=> state.Card);
+  const card = useSelector(state => state.Card);
 
   // Detail과 중복함수
-  const whenPageMovedInputValueClear = (page)=>{
+  const whenPageMovedInputValueClear = (page) => {
     dispatch({
       type: 'clear',
       payLoad: {
@@ -24,43 +24,38 @@ function Complete() {
     navigate(`${page}`);
   }
   // Home 중복함수
-  const deleteBtnClickHandler = (id) => {
+  const BtnClickHandler = (event, id) => {
+    const type = event.target.name === 'deleteBtn' ? 'delete' : 'complete';
     dispatch({
-      type: 'delete',
+      type,
       payLoad: id,
     })
   };
-  // Home 중복함수
-  const changeIsDoneHandler = (id) => {
-    dispatch({
-      type : 'complete',
-      payLoad : id,
-    })
-  }
 
   return (
-      <>
-        <GlobalStyle />
-        <div className='App'>
-          <div className='Card-List'>
-            <button onClick={()=>{
-              whenPageMovedInputValueClear('/');
-            }}>🕐 해야할 일</button>
-            <button style={{
-              color: 'red',}}>🎉완료 List</button>
-            <Container>
+    <>
+      <GlobalStyle />
+      <div className='App'>
+        <div className='Card-List'>
+          <button onClick={() => {
+            whenPageMovedInputValueClear('/');
+          }}>🕐 해야할 일</button>
+          <button style={{
+            color: 'red',
+          }}>🎉완료 List</button>
+          <Container>
             {card.map((card) => {
               if (card.isDone === true) {
-                return <CardOne deleteBtnClick={deleteBtnClickHandler} changeBtnClick={changeIsDoneHandler} key={card.id} card={card}/>
+                return <CardOne BtnClick={BtnClickHandler} key={card.id} card={card} />
               }
               return null;
             }
             )}
-            </Container>
-          </div>
+          </Container>
         </div>
-      </>
-    )
+      </div>
+    </>
+  )
 }
 
 export default Complete

@@ -16,25 +16,25 @@ const CardBox = styled.div`
   font-weight : Bold;
 `
 
-function CardOne({deleteBtnClick, changeBtnClick, card}) {
+function CardOne({ BtnClick, card }) {
 
-  const {title, context, date, id} = card;
+  const { title, context, date, id } = card;
 
   const navigate = useNavigate();
 
-  const completeBtnContext = card.isDone? '취소':'완료';
+  const completeBtnContext = card.isDone ? '취소' : '완료';
 
   return (
     <CardBox>
       <p>제목 : {title}</p>
       <p> 본문 : {context}</p>
       <div style={{
-        display : 'flex',
+        display: 'flex',
         margin: 'auto auto 0 auto',
-        gap : 10,
+        gap: 10,
       }}>
-        <button onClick={() => deleteBtnClick(id)}>삭제</button>
-        <button onClick={() => changeBtnClick(id)}>{completeBtnContext}</button>
+        <button name='deleteBtn' onClick={(event) => BtnClick(event, id)}>삭제</button>
+        <button name='completeBtn' onClick={(event) => BtnClick(event, id)}>{completeBtnContext}</button>
         <button style={hiddenStyle(card)} onClick={() => {
           navigate(`/detail/${id}`);
         }}>상세보기</button>
@@ -42,10 +42,10 @@ function CardOne({deleteBtnClick, changeBtnClick, card}) {
       <div style={{
         width: '100%',
         margin: '0 auto',
-        textAlign : 'center',
+        textAlign: 'center',
       }}>
         <span style={
-          {...hiddenStyle(card),fontSize : 13}
+          { ...hiddenStyle(card), fontSize: 13 }
         }>Due Date : {date}</span>
       </div>
     </CardBox>

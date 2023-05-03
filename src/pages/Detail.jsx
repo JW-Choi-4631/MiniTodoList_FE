@@ -16,6 +16,9 @@ const StyledDiv = styled.div`
   width : 33%;
   background-color : #D9D9D9;
   justify-content : center;
+  padding : 5px;
+  border-radius : 5px;
+  opacity : 0.85;
 `
 
 function Detail() {

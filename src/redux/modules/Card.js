@@ -16,19 +16,19 @@ const Card = (state = initialState, action) => {
             // let diffMin = Math.floor((diff / (1000*60)) % 60);
             // let diffSec = Math.floor(diff / 1000 % 60);
             return [...state, {
-                id : (createDate + random).toString(),
-                title : action.payLoad.title,
-                context : action.payLoad.context,
-                date : action.payLoad.date,//`${diffDay}일 ${diffHour}시 ${diffMin}분 ${diffSec}초`
-                isDone : false,
+                id: (createDate + random).toString(),
+                title: action.payLoad.title,
+                context: action.payLoad.context,
+                date: action.payLoad.date,//`${diffDay}일 ${diffHour}시 ${diffMin}분 ${diffSec}초`
+                isDone: false,
             }];
         case 'delete':
             const newCardList = state.filter(card => card.id !== action.payLoad);
             return newCardList;
         case 'complete':
-            const completeCardList = state.map((card)=>{
-                if(card.id === action.payLoad){
-                    return {...card, isDone: card.isDone? false:true}
+            const completeCardList = state.map((card) => {
+                if (card.id === action.payLoad) {
+                    return { ...card, isDone: card.isDone ? false : true }
                 } else {
                     return card;
                 }
@@ -36,7 +36,7 @@ const Card = (state = initialState, action) => {
             return completeCardList;
         case 'change':
             const changeCardList = state.map(card => {
-                if(card.id !== action.payLoad.id) {
+                if (card.id !== action.payLoad.id) {
                     return card;
                 }
                 else {
