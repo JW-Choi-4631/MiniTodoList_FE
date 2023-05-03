@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from "styled-components";
 import GlobalStyle from "../components/GlobalStyle"
@@ -25,15 +25,28 @@ function Home() {
     return state.Card;
   });
 
-  const Context = useSelector((state) => {
-    return state.SaveContext;
+  // Redux로 state 생성
+  const Content = useSelector((state) => {
+    return state.SaveContent;
   });
+
+  // // useRef 사용
+  // let Title = useRef();
+  // let Date = useRef();
+  // let Context = useRef();
+
+  // // value 이용
+  // let Content = {
+  //   title : '',
+  //   context : '',
+  //   date : '',
+  // }
 
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const contextChangeHandler = (event) => {
+  const contentChangeHandler = (event) => {
     let inputname = event.target.name;
     switch (inputname) {
       case 'titleInput':
@@ -60,7 +73,7 @@ function Home() {
   const saveBtnClickHandler = () => {
     dispatch({
       type: 'save',
-      payLoad: Context
+      payLoad: Content,
     })
     dispatch({
       type : 'clear',
@@ -93,13 +106,13 @@ function Home() {
         <div className="save-Box">
           <InputContainer className="inputTitle">
             <label>제목</label>
-            <input name='titleInput' onChange={contextChangeHandler} value={Context.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
+            <input name='titleInput' onChange = {contentChangeHandler} value={Content.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)'  />
             <label>기한 날짜</label>
-            <input name='dateInput' value = {Context.date} onChange={contextChangeHandler} type="date" />
+            <input name='dateInput' onChange = {contentChangeHandler} type="date" />
           </InputContainer>
           <InputContainer className='inputContext'>
             <label>상세 내역</label>
-            <textarea name='contextInput' value = {Context.context} onChange={contextChangeHandler} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
+            <textarea name='contextInput' onChange = {contentChangeHandler} value={Content.context} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
           </InputContainer>
           <InputContainer className='buttonBox'>
             <button onClick={saveBtnClickHandler}> 저장하기 </button>

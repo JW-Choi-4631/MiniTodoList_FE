@@ -8,14 +8,14 @@ function Detail() {
 
   const navigate = useNavigate();
   const cardList = useSelector(state => state.Card);
-  const Context = useSelector(state => state.SaveContext);
+  const Content = useSelector(state => state.SaveContent);
   const dispatch = useDispatch();
   const params = useParams();
   const foundCard = cardList.find((card) => {
     return card.id === params.id
   });
 
-  const contextChangeHandler = (event) => {
+  const contentChangeHandler = (event) => {
     let inputname = event.target.name;
     switch (inputname) {
       case 'titleInput':
@@ -56,9 +56,9 @@ function Detail() {
       type: 'change',
       payLoad: {
         id: params.id,
-        title: Context.title,
-        context: Context.context,
-        date: Context.date,
+        title: Content.title,
+        context: Content.context,
+        date: Content.date,
         isDone: false,
       }
     })
@@ -75,11 +75,11 @@ function Detail() {
       </div>
       <div>
         <p>ID : {foundCard.id}</p>
-        제목 : <input name='titleInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.title} />
+        제목 : <input name='titleInput' type='text' onChange={contentChangeHandler} placeholder={foundCard.title} />
         <br />
-        본문 : <textarea name='contextInput' type='text' onChange={contextChangeHandler} placeholder={foundCard.context} />
+        본문 : <textarea name='contextInput' type='text' onChange={contentChangeHandler} placeholder={foundCard.context} />
         <br />
-        <input name='dateInput' type='date' onChange={contextChangeHandler} />
+        <input name='dateInput' type='date' onChange={contentChangeHandler} />
         <p> D-Day : {foundCard.date}</p>
         <button onClick={changeBtnClickHandler}>수정하기</button>
         &nbsp;&nbsp;&nbsp;

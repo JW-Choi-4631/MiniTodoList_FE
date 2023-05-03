@@ -4,7 +4,7 @@ const initialState = {
     date: '',
 }
 
-const SaveContext = (state = initialState, action) => {
+const SaveContent = (state = initialState, action) => {
     switch (action.type) {
         case 'title':
             return {
@@ -28,4 +28,4 @@ const SaveContext = (state = initialState, action) => {
     }
 }
 
-export default SaveContext;
+export default SaveContent;
