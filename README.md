@@ -37,4 +37,7 @@
 3. delete 기능 구현 중 해당 id뿐만 아니라 다른 id의 Card 전부 삭제되는 현상 발생
 -> reducer에서 return 시 filter 이용하여 새로운 배열(newCardList)을 생성하여 [newCardList] 형태로 return하여 발생한 현상, newCardList만 return하도록 수정 
    (filter으로 만들어진 것은 이미 배열 객체이다. 배열 객체에 다시 배열을 씌워 2차원 배열 형태로 만들어 return 하여 발생한 현상)
+   
+# 향후 추가 필요한 기능
+-> 실시간으로 남은 시간 보여주는 것 (Date.now() & Content.date 를 함수를 이용해 일정 시간흐르면 업데이트 하는 식으로 적용 가능)  
 
