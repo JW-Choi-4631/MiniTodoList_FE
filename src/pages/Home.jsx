@@ -46,6 +46,7 @@ function Home() {
 
   const navigate = useNavigate();
 
+  // Detail Page와 중복되는 함수
   const contentChangeHandler = (event) => {
     let inputname = event.target.name;
     switch (inputname) {
@@ -84,14 +85,14 @@ function Home() {
       }
     })
   };
-
+  // Complete Page와 중복되는 함수
   const deleteBtnClickHandler = (id) => {
     dispatch({
       type: 'delete',
       payLoad: id,
     })
   };
-
+  // Complete Page와 중복되는 함수
   const changeIsDoneHandler = (id) => {
     dispatch({
       type : 'complete',

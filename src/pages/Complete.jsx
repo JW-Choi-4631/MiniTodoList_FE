@@ -10,6 +10,7 @@ function Complete() {
   const dispatch = useDispatch();
   const cardList = useSelector(state=> state.Card);
 
+  // Detail과 중복함수
   const whenPageMovedInputValueClear = (page)=>{
     dispatch({
       type: 'clear',
@@ -21,14 +22,14 @@ function Complete() {
     })
     navigate(`${page}`);
   }
-
+  // Home 중복함수
   const deleteBtnClickHandler = (id) => {
     dispatch({
       type: 'delete',
       payLoad: id,
     })
   };
-
+  // Home 중복함수
   const changeIsDoneHandler = (id) => {
     dispatch({
       type : 'complete',
@@ -56,9 +57,7 @@ function Complete() {
       <button onClick={()=>{
         whenPageMovedInputValueClear('/');
       }}>이전으로</button>
-    
     </>
-    
   )
 }
 

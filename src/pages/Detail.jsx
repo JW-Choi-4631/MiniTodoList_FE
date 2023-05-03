@@ -15,6 +15,7 @@ function Detail() {
     return card.id === params.id
   });
 
+  // Home 과 중복
   const contentChangeHandler = (event) => {
     let inputname = event.target.name;
     switch (inputname) {
@@ -39,6 +40,7 @@ function Detail() {
     }
   };
 
+  //Complete Page와 중복됨
   const whenPageMovedInputValueClear = (page)=>{
     dispatch({
       type: 'clear',
