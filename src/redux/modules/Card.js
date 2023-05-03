@@ -9,7 +9,7 @@ const Card = (state = initialState, action) => {
 
     switch (action.type) {
         case 'save':
-            // 향후 실시간 남은 시간 계산 시 사용
+            // //향후 실시간 남은 시간 계산 시 사용
             // let diff = new Date(action.payLoad.date) - createDate;
             // let diffDay = Math.floor(diff / (1000*60*60*24));
             // let diffHour = Math.floor((diff / (1000*60*60)) % 24);
@@ -35,8 +35,15 @@ const Card = (state = initialState, action) => {
             })
             return completeCardList;
         case 'change':
-            const changeCardList = state.filter(card => card.id !== action.payLoad.id);
-            return [...changeCardList, action.payLoad]
+            const changeCardList = state.map(card => {
+                if(card.id !== action.payLoad.id) {
+                    return card;
+                }
+                else {
+                    return action.payLoad;
+                }
+            })
+            return changeCardList
         default:
             return state;
     }

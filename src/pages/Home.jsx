@@ -1,17 +1,10 @@
-import React, { useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from "styled-components";
 import GlobalStyle from "../components/GlobalStyle"
 import '../App.css'
 import { useNavigate } from 'react-router-dom';
 import CardOne from '../components/CardOne';
-
-const Container = styled.div`
-  display : flex;
-  flex-wrap : wrap;
-  gap : 2%;
-  margin: 10px 0;
-`
+import { Container } from '../duplications/common'
 
 const InputContainer = styled.div`
   display: flex;
@@ -117,15 +110,15 @@ function Home() {
           </InputContainer>
           <InputContainer className='buttonBox'>
             <button onClick={saveBtnClickHandler}> 저장하기 </button>
-            <button onClick={() => {
-              navigate('/complete')
-            }}>완료 List</button>
           </InputContainer>
         </div>
         <div className='Card-List'>
-          <h3 style={{
+          <button style={{
             color: 'red',
-          }}>🕐 해야할 일</h3>
+          }}>🕐 해야할 일</button>
+          <button onClick={() => {
+              navigate('/complete')
+            }}>🎉완료 List</button>
           <Container>
           {card.map((card) => {
             if (card.isDone === false) {

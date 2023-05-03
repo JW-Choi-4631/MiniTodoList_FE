@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import CardOne from '../components/CardOne';
 import GlobalStyle from '../components/GlobalStyle';
+import { Container } from '../duplications/common';
 
 function Complete() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cardList = useSelector(state=> state.Card);
+  const card = useSelector(state=> state.Card);
 
   // Detail과 중복함수
   const whenPageMovedInputValueClear = (page)=>{
@@ -38,27 +39,28 @@ function Complete() {
   }
 
   return (
-    <>
-    <GlobalStyle />
-    <h1>Complete</h1>
-    <div style={{
-      display : 'flex',
-      gap : 20,
-    }}>
-      {cardList.map((card)=>{
-        if(card.isDone === true){
-          return (
-            <CardOne key = {card.id} deleteBtnClick = {deleteBtnClickHandler} changeBtnClick={changeIsDoneHandler} card={card}/>
-            )
-        }
-        return null;
-      })}
-      </div>
-      <button onClick={()=>{
-        whenPageMovedInputValueClear('/');
-      }}>이전으로</button>
-    </>
-  )
+      <>
+        <GlobalStyle />
+        <div className='App'>
+          <div className='Card-List'>
+            <button onClick={()=>{
+              whenPageMovedInputValueClear('/');
+            }}>🕐 해야할 일</button>
+            <button style={{
+              color: 'red',}}>🎉완료 List</button>
+            <Container>
+            {card.map((card) => {
+              if (card.isDone === true) {
+                return <CardOne deleteBtnClick={deleteBtnClickHandler} changeBtnClick={changeIsDoneHandler} key={card.id} card={card}/>
+              }
+              return null;
+            }
+            )}
+            </Container>
+          </div>
+        </div>
+      </>
+    )
 }
 
 export default Complete

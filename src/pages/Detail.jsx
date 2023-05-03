@@ -1,8 +1,22 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
-import CardOne from '../components/CardOne';
+import styled from 'styled-components';
 import GlobalStyle from '../components/GlobalStyle';
+
+const DetailContainer = styled.div`
+  display : flex;
+  width : 50%;
+  justify-content: space-between;
+  margin : 280px auto;
+  font-size : 20px;
+`
+
+const StyledDiv = styled.div`
+  width : 33%;
+  background-color : #D9D9D9;
+  justify-content : center;
+`
 
 function Detail() {
 
@@ -41,7 +55,7 @@ function Detail() {
   };
 
   //Complete Page와 중복됨
-  const whenPageMovedInputValueClear = (page)=>{
+  const whenPageMovedInputValueClear = (page) => {
     dispatch({
       type: 'clear',
       payLoad: {
@@ -70,26 +84,45 @@ function Detail() {
 
   return (
     <>
-    <GlobalStyle />
-    <div>
-      <div>
+      <GlobalStyle />
+      <DetailContainer>
+        <StyledDiv>
+          <h1 style={{
+            textAlign: 'center',
+          }}>원문</h1>
+          <p>ID : {foundCard.id}</p>
+          <p>제목 : {foundCard.title}</p>
+          <p>본문 : {foundCard.context}</p>
+          <p>날짜 : {foundCard.date}</p>
+        </StyledDiv>
+        <StyledDiv>
+          <h1 style={{
+            textAlign: 'center',
+          }}>변경</h1>
+          <p>ID : {foundCard.id}</p>
+          <p style={{
+          }}>제목 : <input name='titleInput' type='text' onChange={contentChangeHandler} placeholder={foundCard.title} /></p>
+          <p style={{
+            display : 'flex',
+            flexDirection : 'row',
+          }}>본문 :&nbsp;<textarea name='contextInput' rows={5} type='text' onChange={contentChangeHandler} placeholder={foundCard.context} /></p>
+          <p>날짜 : <input name='dateInput' type='date' onChange={contentChangeHandler} /></p>
+          <StyledDiv style={{
+            display : 'flex',
+            width : '60%',
+            marginLeft: 50,
+            marginTop : 10,
+            marginBottom : 10,
+            gap : 20,
+          }}>
+            <button onClick={() => {
+              whenPageMovedInputValueClear('/');
+            }}>이전으로</button>
+            <button onClick={changeBtnClickHandler}>수정하기</button>
+          </StyledDiv>
 
-      </div>
-      <div>
-        <p>ID : {foundCard.id}</p>
-        제목 : <input name='titleInput' type='text' onChange={contentChangeHandler} placeholder={foundCard.title} />
-        <br />
-        본문 : <textarea name='contextInput' type='text' onChange={contentChangeHandler} placeholder={foundCard.context} />
-        <br />
-        <input name='dateInput' type='date' onChange={contentChangeHandler} />
-        <p> D-Day : {foundCard.date}</p>
-        <button onClick={changeBtnClickHandler}>수정하기</button>
-        &nbsp;&nbsp;&nbsp;
-        <button onClick={() => {
-          whenPageMovedInputValueClear('/');
-        }}>이전으로</button>
-      </div>
-    </div>
+        </StyledDiv>
+      </DetailContainer>
     </>
   )
 }

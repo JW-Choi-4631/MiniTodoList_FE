@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { hiddenStyle } from '../function/common'
+import { hiddenStyle } from '../duplications/common'
 
 const CardBox = styled.div`
   display : flex;
@@ -10,7 +10,7 @@ const CardBox = styled.div`
   height : 150px;
   border : 1px black solid;
   border-radius : 10px;
-  margin : 10px 0;
+  margin : 10px 10px;
   background-color: white;
   opacity : 0.7;
   font-weight : Bold;

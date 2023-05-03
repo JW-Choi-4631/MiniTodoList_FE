@@ -13,6 +13,10 @@
   margin : 20px auto;
 }
 
+.Card-List {
+  margin-top : 10px;
+}
+
 .inputTitle {
   gap: 2px;
 }
