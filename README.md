@@ -21,9 +21,10 @@
 # 추가 기능 
 
 1. 날짜 입력용 input 추가
--> Todo List가 생성된 시간과 입력된 목표 시간의 차이로 남은 기간 계산
+-> 기한 날짜 저장 기능 추가
 2. 폰트 적용
-3. 진행 중 page와 완료 page react-router-dom으로 분할
+3. 진행 중 page와 완료 page react-router-dom으로 분할 & tap기능과 비슷하게 적용
+4. 완료 List 페이지에서는 상세보기와 Due Date 기능 off ( css property display : none 과 visibility : visible 적용 )
 
 # 발생한 문제점
 
