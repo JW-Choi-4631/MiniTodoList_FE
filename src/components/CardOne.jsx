@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import hiddenStyle from '../function/common'
+import { hiddenStyle } from '../function/common'
 
 const CardBox = styled.div`
   display : flex;
