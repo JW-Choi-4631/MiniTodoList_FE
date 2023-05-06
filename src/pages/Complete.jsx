@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import CardOne from '../components/CardOne';
 import GlobalStyle from '../components/GlobalStyle';
 import { Container } from '../duplications/common';
-import { clear, CLEAR, complete, COMPLETE, erase, ERASE } from '../redux/modules/ActionCreator';
+import { clear, complete, erase } from '../redux/modules/ActionCreator';
+import { useEffect } from 'react';
 
 function Complete() {
 
@@ -22,7 +23,12 @@ function Complete() {
   const BtnClickHandler = (event, id) => {
     const sendType = event.target.name === 'deleteBtn' ? erase(id) : complete(id);
     dispatch(sendType);
+    if(event.target.name === 'completeBtn'){ navigate('/'); }
   };
+
+  useEffect(()=>{
+    localStorage.setItem('todo',JSON.stringify(cards));
+  },[cards]);
 
   return (
     <>

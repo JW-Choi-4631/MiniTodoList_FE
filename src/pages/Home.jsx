@@ -5,11 +5,12 @@ import '../App.css'
 import { useNavigate } from 'react-router-dom';
 import CardOne from '../components/CardOne';
 import { Container } from '../duplications/common'
-import { DATE, title, context, save, erase, complete, clear, date } from '../redux/modules/ActionCreator';
+import { title, context, save, erase, complete, clear, date } from '../redux/modules/ActionCreator';
+import { useEffect } from 'react';
 
 function Home() {
 
-  const card = useSelector((state) => {
+  const cards = useSelector((state) => {
     return state.Card;
   });
 
@@ -17,18 +18,6 @@ function Home() {
   const Content = useSelector((state) => {
     return state.Content;
   });
-
-  // // useRef 사용
-  // let Title = useRef();
-  // let Date = useRef();
-  // let Context = useRef();
-
-  // // value 이용
-  // let Content = {
-  //   title : '',
-  //   context : '',
-  //   date : '',
-  // }
 
   const dispatch = useDispatch();
 
@@ -55,11 +44,19 @@ function Home() {
     dispatch(save(Content));
     dispatch(clear());
   };
+
   // Complete Page와 중복되는 함수
   const BtnClickHandler = (event, payLoad) => {
     const sendType = event.target.name === 'deleteBtn' ? erase(payLoad) : complete(payLoad);
-    dispatch(sendType)
+    dispatch(sendType);
+    if(event.target.name === 'completeBtn' ){
+      navigate('/complete');
+    }
   };
+
+  useEffect(()=>{
+    localStorage.setItem('todo',JSON.stringify(cards));
+  },[cards]);
 
   return (
     <>
@@ -88,7 +85,7 @@ function Home() {
             navigate('/complete')
           }}>🎉완료 List</button>
           <Container>
-            {card.map((card) => {
+            {cards.map((card) => {
               if (card.isDone === false) {
                 return <CardOne BtnClick={BtnClickHandler} key={card.id} card={card} />
               }
