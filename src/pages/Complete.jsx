@@ -11,7 +11,7 @@ function Complete() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  const card = useSelector(state => state.Card);
+  const cards = useSelector(state => state.Card);
 
   // Detail과 중복함수
   const whenPageMovedInputValueClear = (page) => {
@@ -36,7 +36,7 @@ function Complete() {
             color: 'red',
           }}>🎉완료 List</button>
           <Container>
-            {card.map((card) => {
+            {cards.map((card) => {
               if (card.isDone === true) {
                 return <CardOne BtnClick={BtnClickHandler} key={card.id} card={card} />
               }

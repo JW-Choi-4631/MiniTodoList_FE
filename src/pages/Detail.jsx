@@ -32,17 +32,17 @@ function Detail() {
   const foundCard = cardList.find((card) => card.id === params.id);
 
   // Home 과 중복
-  const contentChangeHandler = (event) => {
-    let inputname = event.target.name;
-    switch (inputname) {
-      case 'titleInput':
-        dispatch(title(event.target.value));
+  const contentChangeHandler = ({target}) => {
+    const {name, value} = target;
+    switch (name) {
+      case 'title':
+        dispatch(title(value));
         break;
-      case 'contextInput':
-        dispatch(context(event.target.value));
+      case 'context':
+        dispatch(context(value));
         break;
-      case 'dateInput':
-        dispatch(date(event.target.value));
+      case 'date':
+        dispatch(date(value));
         break;
       default:
           break;
@@ -87,12 +87,12 @@ function Detail() {
           }}>변경</h1>
           <p>ID : {foundCard.id}</p>
           <p style={{
-          }}>제목 : <input name='titleInput' type='text' onChange={contentChangeHandler} placeholder={foundCard.title} /></p>
+          }}>제목 : <input name='title' type='text' onChange={contentChangeHandler} placeholder={foundCard.title} /></p>
           <p style={{
             display : 'flex',
             flexDirection : 'row',
-          }}>본문 :&nbsp;<textarea name='contextInput' rows={5} type='text' onChange={contentChangeHandler} placeholder={foundCard.context} /></p>
-          <p>날짜 : <input name='dateInput' type='date' onChange={contentChangeHandler} /></p>
+          }}>본문 :&nbsp;<textarea name='context' rows={5} type='text' onChange={contentChangeHandler} placeholder={foundCard.context} /></p>
+          <p>날짜 : <input name='date' type='date' onChange={contentChangeHandler} /></p>
           <StyledDiv style={{
             display : 'flex',
             width : '60%',

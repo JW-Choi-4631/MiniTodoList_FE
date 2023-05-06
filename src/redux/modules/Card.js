@@ -26,23 +26,10 @@ const Card = (state = initialState, action) => {
             const newCardList = state.filter(card => card.id !== action.payLoad);
             return newCardList;
         case COMPLETE:
-            const completeCardList = state.map((card) => {
-                if (card.id === action.payLoad) {
-                    return { ...card, isDone: card.isDone ? false : true }
-                } else {
-                    return card;
-                }
-            })
+            const completeCardList = state.map((card) => (card.id === action.payLoad)? { ...card, isDone: !card.isDone }: card)
             return completeCardList;
         case CHANGE:
-            const changeCardList = state.map(card => {
-                if (card.id === action.payLoad.id) {
-                    return action.payLoad;
-                }
-                else {
-                    return card;
-                }
-            })
+            const changeCardList = state.map(card => (card.id === action.payLoad.id)? action.payLoad : card)
             return changeCardList
         default:
             return state;

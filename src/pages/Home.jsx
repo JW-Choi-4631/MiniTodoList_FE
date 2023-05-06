@@ -34,17 +34,17 @@ function Home() {
 
   const navigate = useNavigate();
 
-  const contentChangeHandler = (event) => {
-    let inputname = event.target.name;
-    switch (inputname) {
-      case 'titleInput':
-        dispatch(title(event.target.value));
+  const contentChangeHandler = ({target}) => {
+    const {name, value} = target;
+    switch (name) {
+      case 'title':
+        dispatch(title(value));
         break;
-      case 'contextInput':
-        dispatch(context(event.target.value));
+      case 'context':
+        dispatch(context(value));
         break;
-      case 'dateInput':
-        dispatch(date(event.target.value));
+      case 'date':
+        dispatch(date(value));
         break;
       default:
         break;
@@ -68,13 +68,13 @@ function Home() {
         <div className="save-Box">
           <InputContainer className="inputTitle">
             <label>제목</label>
-            <input name='titleInput' onChange={contentChangeHandler} value={Content.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
+            <input name='title' onChange={contentChangeHandler} value={Content.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
             <label>기한 날짜</label>
-            <input name='dateInput' onChange={contentChangeHandler} value={Content.date} type="date" />
+            <input name='date' onChange={contentChangeHandler} value={Content.date} type="date" />
           </InputContainer>
           <InputContainer className='inputContext'>
             <label>상세 내역</label>
-            <textarea name='contextInput' onChange={contentChangeHandler} value={Content.context} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
+            <textarea name='context' onChange={contentChangeHandler} value={Content.context} cols={30} rows={4} type="text" placeholder='내용을 입력하세요.' />
           </InputContainer>
           <InputContainer className='buttonBox'>
             <button onClick={saveBtnClickHandler}> 저장하기 </button>
