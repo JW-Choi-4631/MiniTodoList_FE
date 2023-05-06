@@ -4,32 +4,24 @@ import { useNavigate } from 'react-router-dom'
 import CardOne from '../components/CardOne';
 import GlobalStyle from '../components/GlobalStyle';
 import { Container } from '../duplications/common';
+import { clear, CLEAR, complete, COMPLETE, erase, ERASE } from '../redux/modules/ActionCreator';
 
 function Complete() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
   const card = useSelector(state => state.Card);
 
   // Detail과 중복함수
   const whenPageMovedInputValueClear = (page) => {
-    dispatch({
-      type: 'clear',
-      payLoad: {
-        title: '',
-        date: '',
-        context: '',
-      }
-    })
+    dispatch(clear());
     navigate(`${page}`);
   }
   // Home 중복함수
   const BtnClickHandler = (event, id) => {
-    const type = event.target.name === 'deleteBtn' ? 'delete' : 'complete';
-    dispatch({
-      type,
-      payLoad: id,
-    })
+    const sendType = event.target.name === 'deleteBtn' ? erase(id) : complete(id);
+    dispatch(sendType);
   };
 
   return (

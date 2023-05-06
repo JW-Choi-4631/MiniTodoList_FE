@@ -5,12 +5,7 @@ import '../App.css'
 import { useNavigate } from 'react-router-dom';
 import CardOne from '../components/CardOne';
 import { Container } from '../duplications/common'
-
-const InputContainer = styled.div`
-  display: flex;
-  text-align: left;
-  flex-direction: column;
-`
+import { DATE, title, context, save, erase, complete, clear, date } from '../redux/modules/ActionCreator';
 
 function Home() {
 
@@ -20,7 +15,7 @@ function Home() {
 
   // Redux로 state 생성
   const Content = useSelector((state) => {
-    return state.SaveContent;
+    return state.Content;
   });
 
   // // useRef 사용
@@ -39,27 +34,17 @@ function Home() {
 
   const navigate = useNavigate();
 
-  // Detail Page와 중복되는 함수
   const contentChangeHandler = (event) => {
     let inputname = event.target.name;
     switch (inputname) {
       case 'titleInput':
-        dispatch({
-          type: 'title',
-          payLoad: event.target.value,
-        })
+        dispatch(title(event.target.value));
         break;
       case 'contextInput':
-        dispatch({
-          type: 'context',
-          payLoad: event.target.value,
-        })
+        dispatch(context(event.target.value));
         break;
       case 'dateInput':
-        dispatch({
-          type: 'date',
-          payLoad: event.target.value,
-        })
+        dispatch(date(event.target.value));
         break;
       default:
         break;
@@ -67,26 +52,13 @@ function Home() {
   };
 
   const saveBtnClickHandler = () => {
-    dispatch({
-      type: 'save',
-      payLoad: Content,
-    })
-    dispatch({
-      type: 'clear',
-      payLoad: {
-        title: '',
-        date: '',
-        context: '',
-      }
-    })
+    dispatch(save(Content));
+    dispatch(clear());
   };
   // Complete Page와 중복되는 함수
-  const BtnClickHandler = (event, id) => {
-    const type = event.target.name === 'deleteBtn' ? 'delete' : 'complete';
-    dispatch({
-      type,
-      payLoad: id,
-    })
+  const BtnClickHandler = (event, payLoad) => {
+    const sendType = event.target.name === 'deleteBtn' ? erase(payLoad) : complete(payLoad);
+    dispatch(sendType)
   };
 
   return (
@@ -98,7 +70,7 @@ function Home() {
             <label>제목</label>
             <input name='titleInput' onChange={contentChangeHandler} value={Content.title} maxLength={15} type="text" placeholder='제목을 입력하세요.(최대 15자)' />
             <label>기한 날짜</label>
-            <input name='dateInput' onChange={contentChangeHandler} type="date" />
+            <input name='dateInput' onChange={contentChangeHandler} value={Content.date} type="date" />
           </InputContainer>
           <InputContainer className='inputContext'>
             <label>상세 내역</label>
@@ -131,3 +103,9 @@ function Home() {
 }
 
 export default Home
+
+const InputContainer = styled.div`
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+`

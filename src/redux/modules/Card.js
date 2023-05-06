@@ -1,3 +1,5 @@
+import { SAVE, COMPLETE, CHANGE, ERASE } from "./ActionCreator";
+
 const initialState = [];
 
 const Card = (state = initialState, action) => {
@@ -6,7 +8,7 @@ const Card = (state = initialState, action) => {
     const random = Math.random();
 
     switch (action.type) {
-        case 'save':
+        case SAVE:
             // //향후 실시간 남은 시간 계산 시 사용
             // let diff = new Date(action.payLoad.date) - createDate;
             // let diffDay = Math.floor(diff / (1000*60*60*24));
@@ -20,10 +22,10 @@ const Card = (state = initialState, action) => {
                 date: action.payLoad.date,//`${diffDay}일 ${diffHour}시 ${diffMin}분 ${diffSec}초`
                 isDone: false,
             }];
-        case 'delete':
+        case ERASE:
             const newCardList = state.filter(card => card.id !== action.payLoad);
             return newCardList;
-        case 'complete':
+        case COMPLETE:
             const completeCardList = state.map((card) => {
                 if (card.id === action.payLoad) {
                     return { ...card, isDone: card.isDone ? false : true }
@@ -32,13 +34,13 @@ const Card = (state = initialState, action) => {
                 }
             })
             return completeCardList;
-        case 'change':
+        case CHANGE:
             const changeCardList = state.map(card => {
-                if (card.id !== action.payLoad.id) {
-                    return card;
+                if (card.id === action.payLoad.id) {
+                    return action.payLoad;
                 }
                 else {
-                    return action.payLoad;
+                    return card;
                 }
             })
             return changeCardList

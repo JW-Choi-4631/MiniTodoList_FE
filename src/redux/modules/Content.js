@@ -1,3 +1,5 @@
+import { CLEAR, CONTEXT, DATE, TITLE } from "./ActionCreator";
+
 const initialState = {
     title: '',
     context: '',
@@ -6,23 +8,23 @@ const initialState = {
 
 const SaveContent = (state = initialState, action) => {
     switch (action.type) {
-        case 'title':
+        case TITLE:
             return {
                 ...state,
                 title: action.payLoad
             };
-        case 'context':
+        case CONTEXT:
             return {
                 ...state,
                 context: action.payLoad,
             };
-        case 'date':
+        case DATE:
             return {
                 ...state,
                 date: action.payLoad
             };
-        case 'clear':
-            return action.payLoad;
+        case CLEAR:
+            return initialState;
         default:
             return state;
     }

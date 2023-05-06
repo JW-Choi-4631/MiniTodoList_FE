@@ -1,11 +1,11 @@
 import { createStore } from "redux";
 import { combineReducers } from "redux";
 import Card from "../modules/Card";
-import SaveContent from "../modules/SaveContent";
+import Content from "../modules/Content"
 
 const rootReducer = combineReducers({
     Card,
-    SaveContent,
+    Content,
 });
 
 const store = createStore(rootReducer);

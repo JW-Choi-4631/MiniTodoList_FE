@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components';
 import GlobalStyle from '../components/GlobalStyle';
+import { change, clear, context, date, title } from '../redux/modules/ActionCreator';
 
 const DetailContainer = styled.div`
   display : flex;
@@ -25,34 +26,23 @@ function Detail() {
 
   const navigate = useNavigate();
   const cardList = useSelector(state => state.Card);
-  const Content = useSelector(state => state.SaveContent);
+  const Content = useSelector(state => state.Content);
   const dispatch = useDispatch();
   const params = useParams();
-  const foundCard = cardList.find((card) => {
-    return card.id === params.id
-  });
+  const foundCard = cardList.find((card) => card.id === params.id);
 
   // Home 과 중복
   const contentChangeHandler = (event) => {
     let inputname = event.target.name;
     switch (inputname) {
       case 'titleInput':
-        dispatch({
-          type: 'title',
-          payLoad: event.target.value,
-        })
+        dispatch(title(event.target.value));
         break;
       case 'contextInput':
-        dispatch({
-          type: 'context',
-          payLoad: event.target.value,
-        })
+        dispatch(context(event.target.value));
         break;
       case 'dateInput':
-        dispatch({
-          type: 'date',
-          payLoad: event.target.value,
-        })
+        dispatch(date(event.target.value));
         break;
       default:
           break;
@@ -61,28 +51,19 @@ function Detail() {
 
   //Complete Page와 중복됨
   const whenPageMovedInputValueClear = (page) => {
-    dispatch({
-      type: 'clear',
-      payLoad: {
-        title: '',
-        date: '',
-        context: '',
-      }
-    })
+    dispatch(clear());
     navigate(`${page}`);
   }
 
   const changeBtnClickHandler = () => {
-    dispatch({
-      type: 'change',
-      payLoad: {
-        id: params.id,
-        title: Content.title,
-        context: Content.context,
-        date: Content.date,
-        isDone: false,
-      }
-    })
+    const newCard = {
+      id: params.id,
+      title: Content.title,
+      context: Content.context,
+      date: Content.date,
+      isDone: false,
+    };
+    dispatch(change(newCard));
     whenPageMovedInputValueClear('/');
   }
 
