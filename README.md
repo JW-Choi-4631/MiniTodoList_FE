@@ -12,11 +12,13 @@
 3. Update Todo
 4. Delete Todo
 
-# 사용 tool
+# 사용 package
 
+0. react, react-dom
 1. 상태(state)관리툴 : redux, react-redux
 2. react-router-dom
 3. styled-components
+4. redux-devtools-extension 내 composeWithDevTools() 기능
 
 # 추가 기능 
 
@@ -24,7 +26,7 @@
 -> 기한 날짜 저장 기능 추가
 2. 폰트 적용
 3. 진행 중 page와 완료 page react-router-dom으로 분할 & tap기능과 비슷하게 적용
-4. 완료 List 페이지에서는 상세보기와 Due Date 기능 off ( css property display : none 과 visibility : visible 적용 )
+4. 완료 페이지에서는 상세보기와 Due Date 기능 off ( css property display : none 과 visibility : visible 적용 )
 
 # 발생한 문제점
 
@@ -41,3 +43,19 @@
 # 향후 추가 필요한 기능
 -> 실시간으로 남은 시간 보여주는 것 (Date.now() & Content.date 를 함수를 이용해 일정 시간흐르면 업데이트 하는 식으로 적용 가능)  
 
+# 코드리뷰 후 개선사항
+1. action creator 생성 
+- action creator 없이 코드를 작성하면 Human Error가 발생할 위험성이 큼 -> modules 폴더 내 ActionCreator.js 라는 파일을 생성하여 Action value 및 Action creator를 생성
+
+2. 초기화 하는 부분 변경 
+- 기존: 빈 객체를 payLoad로 넣어주는 형태 -> state의 초기화 값을 return하도록 설정
+
+3. if-else 구문을 삼항연산자로 변경
+
+4. onChange()에서 event 전체를 가져오는 방식 -> 구조분해 할당을 통해 필요한 값만 가져오도록 설정
+
+5. 카드 완료/취소 에 따라 페이지 이동하도록 설정
+- 완료 Button 클릭 -> navigate('/complete')
+- 취소 Button 클릭 -> navigate('/')
+
++ localStroage.setItem / composeWithDevTools 추가
