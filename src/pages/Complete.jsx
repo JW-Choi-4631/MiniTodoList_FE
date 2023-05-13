@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import CardOne from "../components/CardOne";
 import GlobalStyle from "../components/GlobalStyle";
 import { Container } from "../duplications/common";
-import { complete, erase } from "../redux/modules/Card";
-import { clear } from "../redux/modules/Content";
+import { COMPLETE, ERASE } from "../redux/modules/Card";
+import { CLEAR } from "../redux/modules/Content";
 import { useEffect } from "react";
 
 function Complete() {
@@ -16,13 +16,13 @@ function Complete() {
 
   // Detail과 중복함수
   const whenPageMovedInputValueClear = (page) => {
-    dispatch(clear());
+    dispatch(CLEAR());
     navigate(`${page}`);
   };
   // Home 중복함수
   const BtnClickHandler = (event, id) => {
     const sendType =
-      event.target.name === "deleteBtn" ? erase(id) : complete(id);
+      event.target.name === "deleteBtn" ? ERASE(id) : COMPLETE(id);
     dispatch(sendType);
     if (event.target.name === "completeBtn") {
       navigate("/");

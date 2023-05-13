@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "../components/GlobalStyle";
-import { change } from "../redux/modules/Card";
-import { clear, context, date, title } from "../redux/modules/Content";
+import { CHANGE } from "../redux/modules/Card";
+import { CLEAR, CONTENT, TITLE, DATE } from "../redux/modules/Content";
 
 const DetailContainer = styled.div`
   display: flex;
@@ -36,13 +36,13 @@ function Detail() {
     const { name, value } = target;
     switch (name) {
       case "title":
-        dispatch(title(value));
+        dispatch(TITLE(value));
         break;
       case "context":
-        dispatch(context(value));
+        dispatch(CONTENT(value));
         break;
       case "date":
-        dispatch(date(value));
+        dispatch(DATE(value));
         break;
       default:
         break;
@@ -51,7 +51,7 @@ function Detail() {
 
   //Complete Page와 중복됨
   const whenPageMovedInputValueClear = (page) => {
-    dispatch(clear());
+    dispatch(CLEAR());
     navigate(`${page}`);
   };
 
@@ -63,7 +63,7 @@ function Detail() {
       date: Content.date,
       isDone: false,
     };
-    dispatch(change(newCard));
+    dispatch(CHANGE(newCard));
     whenPageMovedInputValueClear("/");
   };
 

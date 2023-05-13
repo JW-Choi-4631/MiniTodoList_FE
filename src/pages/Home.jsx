@@ -5,8 +5,8 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import CardOne from "../components/CardOne";
 import { Container } from "../duplications/common";
-import { save, erase, complete } from "../redux/modules/Card";
-import { title, context, clear, date } from "../redux/modules/Content";
+import { SAVE, ERASE, COMPLETE } from "../redux/modules/Card";
+import { TITLE, DATE, CLEAR, CONTENT } from "../redux/modules/Content";
 import { useEffect } from "react";
 
 function Home() {
@@ -27,13 +27,13 @@ function Home() {
     const { name, value } = target;
     switch (name) {
       case "title":
-        dispatch(title(value));
+        dispatch(TITLE(value));
         break;
       case "context":
-        dispatch(context(value));
+        dispatch(CONTENT(value));
         break;
       case "date":
-        dispatch(date(value));
+        dispatch(DATE(value));
         break;
       default:
         break;
@@ -41,14 +41,14 @@ function Home() {
   };
 
   const saveBtnClickHandler = () => {
-    dispatch(save(Content));
-    dispatch(clear());
+    dispatch(SAVE(Content));
+    dispatch(CLEAR());
   };
 
   // Complete Page와 중복되는 함수
-  const BtnClickHandler = (event, payLoad) => {
+  const BtnClickHandler = (event, payload) => {
     const sendType =
-      event.target.name === "deleteBtn" ? erase(payLoad) : complete(payLoad);
+      event.target.name === "deleteBtn" ? ERASE(payload) : COMPLETE(payload);
     dispatch(sendType);
     if (event.target.name === "completeBtn") {
       navigate("/complete");
