@@ -1,16 +1,18 @@
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .save-Box {
   width: fit-content;
-  height: fit-content;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   text-align: center;
   gap: 20px;
-  margin: 10px;
   background-color: rgb(199, 212, 213);
   padding: 10px;
   border-radius: 10px;
-  margin: 20px auto;
 }
 
 .Card-List {
@@ -24,7 +26,7 @@
 .buttonBox {
   gap: 15px;
 }
-.inputTitle>input {
+.inputTitle > input {
   width: 180px;
 }
 

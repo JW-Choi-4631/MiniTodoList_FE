@@ -50,9 +50,9 @@ function Home() {
     const sendType =
       event.target.name === "deleteBtn" ? ERASE(payload) : COMPLETE(payload);
     dispatch(sendType);
-    if (event.target.name === "completeBtn") {
-      navigate("/complete");
-    }
+    // if (event.target.name === "completeBtn") {
+    //   navigate("/complete");
+    // }
   };
 
   useEffect(() => {
@@ -63,40 +63,75 @@ function Home() {
     <>
       <GlobalStyle />
       <div className="App">
-        <div className="save-Box">
-          <InputContainer className="inputTitle">
-            <label>제목</label>
-            <input
-              name="title"
-              onChange={contentChangeHandler}
-              value={Content.title}
-              maxLength={15}
-              type="text"
-              placeholder="제목을 입력하세요.(최대 15자)"
-            />
-            <label>기한 날짜</label>
-            <input
-              name="date"
-              onChange={contentChangeHandler}
-              value={Content.date}
-              type="date"
-            />
-          </InputContainer>
-          <InputContainer className="inputContext">
-            <label>상세 내역</label>
-            <textarea
-              name="context"
-              onChange={contentChangeHandler}
-              value={Content.context}
-              cols={30}
-              rows={4}
-              type="text"
-              placeholder="내용을 입력하세요."
-            />
-          </InputContainer>
-          <InputContainer className="buttonBox">
-            <button onClick={saveBtnClickHandler}> 저장하기 </button>
-          </InputContainer>
+        <div className="Header">
+          <div
+            style={{
+              position: "relative",
+              width: "20%",
+              height: 110,
+              padding: 10,
+              margin: 10,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-evenly",
+              backgroundColor: "rgb(199, 212, 213)",
+              borderRadius: 10,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <input type="text" />
+              <button>로그인</button>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <input type="password" />
+              <button>회원가입</button>
+            </div>
+          </div>
+          <div className="save-Box">
+            <InputContainer className="inputTitle">
+              <label>제목</label>
+              <input
+                name="title"
+                onChange={contentChangeHandler}
+                value={Content.title}
+                maxLength={15}
+                type="text"
+                placeholder="제목을 입력하세요.(최대 15자)"
+              />
+              <label>기한 날짜</label>
+              <input
+                name="date"
+                onChange={contentChangeHandler}
+                value={Content.date}
+                type="date"
+              />
+            </InputContainer>
+            <InputContainer className="inputContext">
+              <label>상세 내역</label>
+              <textarea
+                name="context"
+                onChange={contentChangeHandler}
+                value={Content.context}
+                cols={30}
+                rows={4}
+                type="text"
+                placeholder="내용을 입력하세요."
+              />
+            </InputContainer>
+            <InputContainer className="buttonBox">
+              <button onClick={saveBtnClickHandler}> 저장하기 </button>
+            </InputContainer>
+          </div>
         </div>
         <div className="Card-List">
           <button
