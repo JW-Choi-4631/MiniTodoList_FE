@@ -32,7 +32,6 @@ const DateBox = styled.div`
 `;
 
 function Todo({ todo }) {
-  console.log(todo);
   return (
     <TodoBox>
       <TitleBox>{todo.title}</TitleBox>

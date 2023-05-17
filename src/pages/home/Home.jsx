@@ -1,8 +1,10 @@
 import React from "react";
 import { useQuery } from "react-query";
 import { styled } from "styled-components";
-import { getTodos } from "../../api/todos";
+import { getTodos } from "../../api/axios";
 import Todo from "../../components/Todo";
+import { useSelector, useDispatch } from "react-redux";
+import { set, clear } from "../../redux/modules/userInfo";
 
 const AppBox = styled.div`
   position: relative;
@@ -37,9 +39,19 @@ const StyledBtn = styled.button`
   background-color: rgb(23, 206, 96);
   color: white;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 10px;
   border-radius: 5px;
   height: 30px;
+`;
+
+const NoBackBtn = styled.button`
+  display: inline-block;
+  border: none;
+  width: 30%;
+  font-size: 10px;
+  font-weight: bolder;
+  background-color: white;
+  margin: 5px 0px 0px auto;
 `;
 
 const StyledInput = styled.input`
@@ -72,8 +84,29 @@ const StructureBox = styled.div`
 `;
 
 function Home() {
-  const { isLoading, isError, data } = useQuery("todos", getTodos);
-  console.log(data);
+  const { isLoading, isError, data } = useQuery("axios", getTodos);
+
+  const userInfo = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+
+  const setUserInfo = ({ target }) => {
+    const { name, value } = target;
+    dispatch(
+      set({
+        name,
+        value,
+      })
+    );
+  };
+
+  const loginBtnClickHandler = () => {
+    dispatch(clear());
+  };
+
+  const signUpBtnClickHandler = () => {
+    alert("회원가입 페이지가 떠야 합니다.");
+  };
+
   if (isLoading) {
     return <p>로딩중입니다...</p>;
   }
@@ -84,9 +117,22 @@ function Home() {
     <AppBox>
       <StructureBox>
         <LoginBox>
-          <StyledInput type="text" placeholder="아이디" />
-          <StyledInput type="password" placeholder="비밀번호" />
-          <StyledBtn>로그인</StyledBtn>
+          <StyledInput
+            name="email"
+            value={userInfo.email}
+            onChange={setUserInfo}
+            type="text"
+            placeholder="아이디"
+          />
+          <StyledInput
+            name="password"
+            value={userInfo.password}
+            onChange={setUserInfo}
+            type="password"
+            placeholder="비밀번호"
+          />
+          <NoBackBtn onClick={signUpBtnClickHandler}>회원가입</NoBackBtn>
+          <StyledBtn onClick={loginBtnClickHandler}>로그인</StyledBtn>
         </LoginBox>
         <ContentBox>
           <StyledInput placeholder="제목을 입력하세요." />
