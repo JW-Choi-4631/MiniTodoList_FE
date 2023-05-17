@@ -1,43 +1,5 @@
-.Header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.save-Box {
-  width: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  text-align: center;
-  gap: 20px;
-  background-color: rgb(199, 212, 213);
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.Card-List {
-  margin-top: 10px;
-}
-
-.inputTitle {
-  gap: 2px;
-}
-
-.buttonBox {
-  gap: 15px;
-}
-.inputTitle > input {
-  width: 180px;
-}
-
-button {
-  padding: 3px;
-}
-
-h3 {
-  background-color: aliceblue;
-  text-align: center;
-  width: fit-content;
-  padding: 0 10px;
-  border-radius: 10px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }

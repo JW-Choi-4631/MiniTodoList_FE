@@ -1,19 +1,24 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from '../pages/Home'
-import Detail from '../pages/Detail'
-import Complete from '../pages/Complete'
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "../pages/home/Home";
+import Complete from "../pages/complete/Complete";
+import Detail from "../pages/detail/Detail";
 
 function Router() {
   return (
     <BrowserRouter>
-        <Routes>
-            <Route path="/" element = {<Home />} />
-            <Route path="/detail/:id" element = {<Detail />} />
-            <Route path="/complete" element = {<Complete />} />
-        </Routes>
+      <header>
+        <h1>Mini Project</h1>
+      </header>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/complete" element={<Complete />} />
+        <Route path="/detail/:id" element={<Detail />} />
+      </Routes>
+      <footer>
+        <h3>pages</h3>
+      </footer>
     </BrowserRouter>
-  )
+  );
 }
 
 export default Router;
