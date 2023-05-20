@@ -34,6 +34,8 @@ function SignUp() {
     >
       <input name="email" onChange={setUserInfo} value={userInfo.email} />
       <input name="password" onChange={setUserInfo} value={userInfo.password} />
+      <input name="nickname" onChange={setUserInfo} value={userInfo.nickname} />
+      <input name="age" onChange={setUserInfo} value={userInfo.age} />
       <button
         onClick={() => {
           console.log(userInfo);

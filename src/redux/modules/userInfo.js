@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   email: "",
   password: "",
+  nickname: "",
+  age: "",
 };
 
 const userInfoSlice = createSlice({
@@ -10,6 +12,12 @@ const userInfoSlice = createSlice({
   initialState,
   reducers: {
     set: (state, action) => {
+      if (action.payload.name === "age") {
+        return (state = {
+          ...state,
+          [action.payload.name]: Number(action.payload.value),
+        });
+      }
       return (state = {
         ...state,
         [action.payload.name]: action.payload.value,
@@ -21,5 +29,5 @@ const userInfoSlice = createSlice({
   },
 });
 
-export const { set, clear } = userInfoSlice.actions;
+export const { set, clear, save } = userInfoSlice.actions;
 export default userInfoSlice.reducer;

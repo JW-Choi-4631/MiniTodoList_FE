@@ -1,35 +1,69 @@
 import axios from "axios";
 
-const getTodos = async () => {
+export const getTodos = async () => {
   try {
-    const response = await axios.get("http://localhost:4000/todos");
-    return response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
+    const response = await axios.get("/api/todo", {
+      headers: { authorization: document.cookie.authorization },
+    });
+    return response.data.todoList.sort(
+      (a, b) => new Date(a.date) - new Date(b.date)
+    );
   } catch (error) {
-    console.log("Get Error : ", error);
+    console.log("GetTodo Error : ", error.response);
     throw error;
   }
 };
 
-const login = async (userInfo) => {
+export const postTodo = async (todo) => {
   try {
-    const response = await axios.post("http://localhost:4000/login", userInfo);
-    return response.data;
+    await axios.post("/api/todo", todo, {
+      headers: { authorization: document.cookie.authorization },
+    });
+  } catch (error) {
+    console.log("PostTodo Error : ", error.response);
+    throw error;
+  }
+};
+
+export const login = async (userInfo) => {
+  try {
+    await axios.post("/api/login", userInfo);
+    const userData = getUserInfo();
+    return userData;
   } catch (error) {
     console.log("Login Error : ", error);
     throw error;
   }
 };
 
-const signUp = async (userInfo) => {
+export const logout = async () => {
   try {
-    const response = await axios.post(
-      "http://localhost:4000/register",
-      userInfo
-    );
-    return response.data.users;
+    await axios.post("/api/logout", {
+      headers: { authorization: document.cookie.authorization },
+    });
+  } catch (error) {
+    console.log("Logout Error : ", error);
+    throw error;
+  }
+};
+
+export const signUp = async (userInfo) => {
+  try {
+    await axios.post("/api/signup", userInfo);
   } catch (error) {
     console.log("SingUp Error : ", error);
     throw error;
   }
 };
-export { getTodos, login, signUp };
+
+export const getUserInfo = async () => {
+  try {
+    const response = await axios.get("/api/auth", {
+      headers: { authorization: document.cookie.authorization },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("getUserInfo Error : ", error);
+    throw error;
+  }
+};
