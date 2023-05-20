@@ -28,10 +28,10 @@ function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const loginMutation = useMutation(login, {
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       console.log("Login 되었습니다.");
       setIsLoggedIn(true);
+      return getUserInfoMutation.mutate();
     },
   });
 
@@ -45,9 +45,7 @@ function Login() {
   const getUserInfoMutation = useMutation(getUserInfo, {
     onSuccess: (data) => {
       setLoginnedData(data["userInfo"]);
-      console.log(loginnedData);
       console.log("user정보를 성공적으로 가져왔습니다.");
-      console.log(data);
       setIsLoggedIn(true);
     },
     onError: () => {

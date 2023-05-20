@@ -28,8 +28,6 @@ export const postTodo = async (todo) => {
 export const login = async (userInfo) => {
   try {
     await axios.post("/api/login", userInfo);
-    const userData = getUserInfo();
-    return userData;
   } catch (error) {
     console.log("Login Error : ", error);
     throw error;
