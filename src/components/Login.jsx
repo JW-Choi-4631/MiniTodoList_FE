@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoginBox, StyledInput, NoBackBtn, StyledBtn } from "./styled/Styled";
 import { useState } from "react";
 import SignUp from "../pages/signup/SignUp";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login({
   isLoggedIn,

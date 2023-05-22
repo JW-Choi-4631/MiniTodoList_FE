@@ -5,10 +5,21 @@ export const getTodos = async () => {
     const response = await axios.get("/api/todo", {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
-    console.log(response.data["todoList"]);
     return response.data["todoList"];
   } catch (error) {
-    console.log("GetTodo Error : ", error.response);
+    console.log("Get TodoList Error : ", error.response);
+    throw error;
+  }
+};
+
+export const getTodo = async (id) => {
+  try {
+    const response = await axios.get(`/api/detail/${id}`, {
+      headers: { Authorization: document.cookie.split("=")[1] },
+    });
+    return response.data["todo"];
+  } catch (error) {
+    console.log("Get error : ", error.message);
     throw error;
   }
 };
@@ -19,7 +30,7 @@ export const postTodo = async (todo) => {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
-    console.log("PostTodo Error : ", error.response);
+    console.log("Post Error : ", error.response);
     throw error;
   }
 };
@@ -54,7 +65,7 @@ export const getCompleteTodos = async () => {
     console.log(response.data["doneList"]);
     return response.data["doneList"];
   } catch (error) {
-    console.log("Get Complete list error: ", error.message);
+    console.log("Get CompleteList error: ", error.message);
     throw error;
   }
 };
