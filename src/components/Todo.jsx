@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 const TodoBox = styled.div`
@@ -32,11 +33,17 @@ const DateBox = styled.div`
 `;
 
 function Todo({ todo }) {
+  const naviagte = useNavigate();
+
+  const goToDetail = (id) => {
+    naviagte(`/detail/:${id}`);
+  };
+
   return (
     <TodoBox>
-      <TitleBox>{todo.title}</TitleBox>
-      <ContentBox>{todo.content}</ContentBox>
-      <DateBox>{todo.date}</DateBox>
+      <TitleBox>{todo["title"]}</TitleBox>
+      <ContentBox>{todo["content"]}</ContentBox>
+      <DateBox>{todo["updateAt"]}</DateBox>
       <div
         style={{
           width: "100%",
@@ -49,7 +56,7 @@ function Todo({ todo }) {
         <button>삭제하기</button>
         <button>완료</button>
       </div>
-      <button>Go to Detail</button>
+      <button onClick={() => goToDetail(todo["todoId"])}>Go to Detail</button>
     </TodoBox>
   );
 }

@@ -28,5 +28,12 @@
       "date": "2023-05-10",
       "isDone": false
     }
+  ],
+  "users": [
+    {
+      "email": "choijung4631@naver.com",
+      "password": "$2a$10$nxisao.Ch1RGwyyuSI0aauJSLmUPtxR2vD1DnshAG7WVaH2agv2Jm",
+      "id": 1
+    }
   ]
 }
