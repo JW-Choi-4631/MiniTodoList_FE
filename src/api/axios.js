@@ -5,9 +5,8 @@ export const getTodos = async () => {
     const response = await axios.get("/api/todo", {
       headers: { authorization: document.cookie.authorization },
     });
-    return response.data.todoList.sort(
-      (a, b) => new Date(a.date) - new Date(b.date)
-    );
+    console.log(response.data["todoList"]);
+    return response.data["todoList"];
   } catch (error) {
     console.log("GetTodo Error : ", error.response);
     throw error;
@@ -17,7 +16,7 @@ export const getTodos = async () => {
 export const postTodo = async (todo) => {
   try {
     await axios.post("/api/todo", todo, {
-      headers: { authorization: document.cookie.authorization },
+      headers: { authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
     console.log("PostTodo Error : ", error.response);
@@ -37,7 +36,7 @@ export const login = async (userInfo) => {
 export const logout = async () => {
   try {
     await axios.post("/api/logout", {
-      headers: { authorization: document.cookie.authorization },
+      headers: { authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
     console.log("Logout Error : ", error);
@@ -57,9 +56,10 @@ export const signUp = async (userInfo) => {
 export const getUserInfo = async () => {
   try {
     const response = await axios.get("/api/auth", {
-      headers: { authorization: document.cookie.authorization },
+      headers: { authorization: document.cookie.split("=")[1] },
     });
-    return response.data;
+    console.log(response.data["userInfo"]);
+    return response.data["userInfo"];
   } catch (error) {
     console.log("getUserInfo Error : ", error);
     throw error;

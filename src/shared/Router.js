@@ -7,18 +7,18 @@ import SignUp from "../pages/signup/SignUp";
 function Router() {
   return (
     <BrowserRouter>
-      <header>
+      {/* <header>
         <h1>Mini Project</h1>
-      </header>
+      </header> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/complete" element={<Complete />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
-      <footer>
+      {/* <footer>
         <h3>pages</h3>
-      </footer>
+      </footer> */}
     </BrowserRouter>
   );
 }
