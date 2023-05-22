@@ -30,7 +30,7 @@ export const deleteTodo = async (id) => {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
-    console.log("delete error : ", error.message);
+    console.log("Delete error : ", error.message);
     throw error;
   }
 };
@@ -41,7 +41,20 @@ export const completeTodo = async (id) => {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
-    console.log("complete error : ", error.message);
+    console.log("Complete error : ", error.message);
+    throw error;
+  }
+};
+
+export const getCompleteTodos = async () => {
+  try {
+    const response = await axios.get("/api/", {
+      headers: { Authorization: document.cookie.split("=")[1] },
+    });
+    console.log(response.data["doneList"]);
+    return response.data["doneList"];
+  } catch (error) {
+    console.log("Get Complete list error: ", error.message);
     throw error;
   }
 };

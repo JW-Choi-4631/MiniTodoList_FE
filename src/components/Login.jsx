@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoginBox, StyledInput, NoBackBtn, StyledBtn } from "./styled/Styled";
 import { useState } from "react";
 import SignUp from "../pages/signup/SignUp";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Login({
   isLoggedIn,
@@ -13,6 +14,7 @@ function Login({
   isError,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userInfo = useSelector((state) => state.userInfo);
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +42,14 @@ function Login({
       <p>nickname : {userInformation["nickname"]}</p>
       <p>age : {userInformation["age"]}</p>
       <button onClick={logout.mutate}>로그아웃</button>
+      <button
+        onClick={() => {
+          navigate("/complete");
+        }}
+      >
+        {" "}
+        Go to Complete{" "}
+      </button>
     </LoginBox>
   ) : (
     <LoginBox>
