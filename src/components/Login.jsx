@@ -1,13 +1,21 @@
 import { clear, set } from "../redux/modules/userInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { LoginBox, StyledInput, NoBackBtn, StyledBtn } from "./styled/Styled";
+import { useState } from "react";
+import SignUp from "../pages/signup/SignUp";
 
-function Login({ isLoggedIn, logout, login, userInformation, loading }) {
+function Login({
+  isLoggedIn,
+  logout,
+  login,
+  userInformation,
+  loading,
+  isError,
+}) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const userInfo = useSelector((state) => state.userInfo);
+  const [isOpen, setIsOpen] = useState(false);
 
   const setUserInfo = ({ target }) => {
     const { name, value } = target;
@@ -19,10 +27,14 @@ function Login({ isLoggedIn, logout, login, userInformation, loading }) {
   };
 
   const signUpBtnClickHandler = () => {
-    navigate("/signup");
+    setIsOpen(true);
   };
 
-  return isLoggedIn && !loading ? (
+  const closeModalHandelr = () => {
+    setIsOpen(false);
+  };
+
+  return isLoggedIn && !loading && !isError ? (
     <LoginBox>
       <p>email : {userInformation["email"]}</p>
       <p>nickname : {userInformation["nickname"]}</p>
@@ -31,6 +43,7 @@ function Login({ isLoggedIn, logout, login, userInformation, loading }) {
     </LoginBox>
   ) : (
     <LoginBox>
+      <SignUp isOpen={isOpen} closeModal={closeModalHandelr} />
       <StyledInput
         name="email"
         value={userInfo.email}

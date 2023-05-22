@@ -31,7 +31,7 @@ function Home() {
     data: todoList,
     isLoading: isTodoListLoading,
     isError: isTodoListError,
-  } = useQuery("todoList", getTodos, {
+  } = useQuery(["todoList"], getTodos, {
     enabled: isLoggedIn,
     retry: 1,
   });
@@ -40,7 +40,7 @@ function Home() {
     data: userInformation,
     isLoading: isUserInfoLoading,
     isError: isUserInfoError,
-  } = useQuery("userInfo", getUserInfo, {
+  } = useQuery(["userInfo"], getUserInfo, {
     enabled: isLoggedIn,
     retry: 1,
   });
