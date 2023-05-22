@@ -32,7 +32,7 @@ const DateBox = styled.div`
   color: grey;
 `;
 
-function Todo({ todo }) {
+function Todo({ todo, deleteTodoMutation, completeTodoMutation }) {
   const naviagte = useNavigate();
 
   const goToDetail = (id) => {
@@ -53,8 +53,20 @@ function Todo({ todo }) {
           marginBottom: "5px",
         }}
       >
-        <button>삭제하기</button>
-        <button>완료</button>
+        <button
+          onClick={() => {
+            deleteTodoMutation(todo["todoId"]);
+          }}
+        >
+          삭제하기
+        </button>
+        <button
+          onClick={() => {
+            completeTodoMutation(todo["todoId"]);
+          }}
+        >
+          완료
+        </button>
       </div>
       <button onClick={() => goToDetail(todo["todoId"])}>Go to Detail</button>
     </TodoBox>

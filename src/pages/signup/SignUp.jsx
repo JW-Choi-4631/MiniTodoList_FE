@@ -72,6 +72,7 @@ function SignUp({ isOpen, closeModal }) {
   const mutation = useMutation(signUp, {
     onSuccess: () => {
       console.log("Success");
+      closeModal();
     },
   });
 
@@ -120,7 +121,7 @@ function SignUp({ isOpen, closeModal }) {
             <label>닉네임</label>
             <br />
             <input
-              name="nickName"
+              name="nickname"
               onChange={setUserInfo}
               value={userInfo.nickName}
               placeholder="두 글자 이상 닉네임"

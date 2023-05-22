@@ -16,7 +16,13 @@ import { useMutation, useQuery } from "react-query";
 import { postTodo, getTodos } from "../../api/axios";
 import { queryClient } from "../../App";
 import { useState } from "react";
-import { login, logout, getUserInfo } from "../../api/axios";
+import {
+  login,
+  logout,
+  getUserInfo,
+  deleteTodo,
+  completeTodo,
+} from "../../api/axios";
 import { clearTodo } from "../../redux/modules/todo";
 
 function Home() {
@@ -50,8 +56,7 @@ function Home() {
     onSuccess: async () => {
       console.log("Login 되었습니다.");
       setIsLoggedIn(true);
-      await queryClient.invalidateQueries("todoList");
-      await queryClient.invalidateQueries("userInfo");
+      await queryClient.invalidateQueries(["todoList", "userInfo"]);
       // getUserInfoMutation.mutate();
     },
   });
@@ -64,6 +69,26 @@ function Home() {
       setIsLoggedIn(false);
     },
   });
+
+  const { mutateAsync: deleteTodoMutation } = useMutation(
+    (id) => deleteTodo(id),
+    {
+      onSuccess: () => {
+        console.log("삭제 성공");
+        queryClient.invalidateQueries(["todoList"]);
+      },
+    }
+  );
+
+  const { mutateAsync: completeTodoMutation } = useMutation(
+    (id) => completeTodo(id),
+    {
+      onSuccess: () => {
+        console.log("완료 성공");
+        queryClient.invalidateQueries(["todoList"]);
+      },
+    }
+  );
 
   // const getUserInfoMutation = useMutation(getUserInfo, {
   //   onSuccess: (data) => {
@@ -97,8 +122,7 @@ function Home() {
     if (document.cookie.split("=")[1]) {
       setIsLoggedIn(true);
     }
-    queryClient.invalidateQueries("userInfo");
-    queryClient.invalidateQueries("todoList");
+    queryClient.invalidateQueries(["todoList", "userInfo"]);
   }, [isLoggedIn]);
 
   return (
@@ -152,7 +176,14 @@ function Home() {
         ) : todoList ? (
           todoList
             .filter((item) => item["done"] === false)
-            .map((item) => <Todo key={item["todoId"]} todo={item} />)
+            .map((item) => (
+              <Todo
+                key={item["todoId"]}
+                todo={item}
+                deleteTodoMutation={deleteTodoMutation}
+                completeTodoMutation={completeTodoMutation}
+              />
+            ))
         ) : (
           <div>todoList가 존재하지 않습니다.</div>
         )}

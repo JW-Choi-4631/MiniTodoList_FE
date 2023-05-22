@@ -3,7 +3,7 @@ import axios from "axios";
 export const getTodos = async () => {
   try {
     const response = await axios.get("/api/todo", {
-      headers: { authorization: document.cookie.authorization },
+      headers: { Authorization: document.cookie.split("=")[1] },
     });
     console.log(response.data["todoList"]);
     return response.data["todoList"];
@@ -16,10 +16,32 @@ export const getTodos = async () => {
 export const postTodo = async (todo) => {
   try {
     await axios.post("/api/todo", todo, {
-      headers: { authorization: document.cookie.split("=")[1] },
+      headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
     console.log("PostTodo Error : ", error.response);
+    throw error;
+  }
+};
+
+export const deleteTodo = async (id) => {
+  try {
+    await axios.delete(`/api/todo/${id}`, {
+      headers: { Authorization: document.cookie.split("=")[1] },
+    });
+  } catch (error) {
+    console.log("delete error : ", error.message);
+    throw error;
+  }
+};
+
+export const completeTodo = async (id) => {
+  try {
+    await axios.patch(`/api/todo/${id}`, {
+      headers: { Authorization: document.cookie.split("=")[1] },
+    });
+  } catch (error) {
+    console.log("complete error : ", error.message);
     throw error;
   }
 };
@@ -36,7 +58,7 @@ export const login = async (userInfo) => {
 export const logout = async () => {
   try {
     await axios.post("/api/logout", {
-      headers: { authorization: document.cookie.split("=")[1] },
+      headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
     console.log("Logout Error : ", error);
@@ -56,9 +78,8 @@ export const signUp = async (userInfo) => {
 export const getUserInfo = async () => {
   try {
     const response = await axios.get("/api/auth", {
-      headers: { authorization: document.cookie.split("=")[1] },
+      headers: { Authorization: document.cookie.split("=")[1] },
     });
-    console.log(response.data["userInfo"]);
     return response.data["userInfo"];
   } catch (error) {
     console.log("getUserInfo Error : ", error);
