@@ -1,5 +1,7 @@
 import axios from "axios";
 
+axios.defaults.withCredentials = true;
+
 export const getTodos = async () => {
   try {
     const response = await axios.get("http://54.180.85.55/api/todo", {
