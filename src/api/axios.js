@@ -41,6 +41,17 @@ export const postTodo = async (todo) => {
   }
 };
 
+export const changeTodo = async (id, todo) => {
+  try {
+    await axios.put(`/api/detail/${id}`, todo, {
+      headers: { Authorization: document.cookie.split("=")[1] },
+    });
+  } catch (error) {
+    console.log("Change Error : ", error.response);
+    throw error;
+  }
+};
+
 export const deleteTodo = async (id) => {
   try {
     await axios.delete(`/api/todo/${id}`, {
