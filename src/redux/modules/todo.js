@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   title: "",
   content: "",
-  date: "",
 };
 
 const todoSlice = createSlice({

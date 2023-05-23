@@ -31,6 +31,7 @@ function Home() {
 
   // const [loginnedData, setLoginnedData] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [dueDate, setDueDate] = useState(new Date());
 
   // todoList Read
   const {
@@ -104,6 +105,7 @@ function Home() {
     onSuccess: () => {
       console.log("post 성공");
       dispatch(clearTodo());
+      setDueDate(new Date());
       queryClient.invalidateQueries("todoList");
     },
   });
@@ -116,6 +118,15 @@ function Home() {
         value,
       })
     );
+  };
+
+  const todoDueDateSetHandler = ({ target }) => {
+    const Today = new Date();
+    const setDay = new Date(target.value);
+    if (Today > setDay) {
+      return alert("날짜 설정이 잘 못 되었습니다");
+    }
+    setDueDate(setDay);
   };
 
   useEffect(() => {
@@ -145,9 +156,10 @@ function Home() {
             placeholder="제목을 입력하세요."
           />
           <StyledInput
-            name="date"
-            onChange={todoInputChangeHandler}
-            value={todo.date}
+            name="duedateAt"
+            onChange={todoDueDateSetHandler}
+            // date type input에 표시 위해 Date형태의 Data 변환
+            value={dueDate?.toISOString().split("T")[0]}
             type="date"
           />
           <StyledTextArea
@@ -158,7 +170,7 @@ function Home() {
           />
           <StyledBtn
             onClick={() => {
-              postTodoMutation.mutate(todo);
+              postTodoMutation.mutate({ ...todo, duedateAt: dueDate });
             }}
           >
             저장하기

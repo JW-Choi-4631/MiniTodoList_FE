@@ -39,11 +39,22 @@ function Todo({ todo, deleteTodoMutation, completeTodoMutation }) {
     naviagte(`/detail/:${id}`);
   };
 
+  const dueDate = (duedate) => {
+    const dueDate = new Date(duedate);
+    const year = dueDate.getFullYear();
+    const month = dueDate.getMonth() + 1;
+    const date = dueDate.getDate();
+    return `${year}-${month}-${date}`;
+  };
+
   return (
     <TodoBox>
       <TitleBox>{todo["title"]}</TitleBox>
       <ContentBox>{todo["content"]}</ContentBox>
-      <DateBox>{todo["updateAt"]}</DateBox>
+      <DateBox>
+        <label>기한: </label>
+        {dueDate(todo["duedateAt"])}
+      </DateBox>
       <div
         style={{
           width: "100%",

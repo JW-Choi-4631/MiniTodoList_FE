@@ -5,7 +5,10 @@ export const getTodos = async () => {
     const response = await axios.get("/api/todo", {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
-    return response.data["todoList"];
+    const result = response.data["todoList"].sort(
+      (a, b) => new Date(a["duedateAt"]) - new Date(b["duedateAt"])
+    );
+    return result;
   } catch (error) {
     console.log("Get TodoList Error : ", error.response);
     throw error;
@@ -29,6 +32,9 @@ export const postTodo = async (todo) => {
     await axios.post("/api/todo", todo, {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
+    console.log(todo);
+    console.log(todo["duedateAt"]);
+    console.log(typeof new Date(todo["duedateAt"]));
   } catch (error) {
     console.log("Post Error : ", error.response);
     throw error;
