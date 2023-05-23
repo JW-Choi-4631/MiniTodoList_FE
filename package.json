@@ -20,6 +20,7 @@
     "react-scripts": "^5.0.1",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
+    "serve": "14.2.0",
     "styled-components": "^6.0.0-rc.1",
     "web-vitals": "^2.1.0"
   },
@@ -47,5 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://54.180.85.55"
 }
