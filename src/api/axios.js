@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true;
 
 export const getTodos = async () => {
   try {
-    const response = await axios.get("http://54.180.85.55/api/todo", {
+    const response = await axios.get("http://13.124.200.126/api/todo", {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
     const result = response.data["todoList"].sort(
@@ -19,7 +19,7 @@ export const getTodos = async () => {
 
 export const getTodo = async (id) => {
   try {
-    const response = await axios.get(`http://54.180.85.55/api/detail/${id}`, {
+    const response = await axios.get(`http://13.124.200.126/api/detail/${id}`, {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
     return response.data["todo"];
@@ -31,7 +31,7 @@ export const getTodo = async (id) => {
 
 export const postTodo = async (todo) => {
   try {
-    await axios.post("http://54.180.85.55/api/todo", todo, {
+    await axios.post("http://13.124.200.126/api/todo", todo, {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
     console.log(todo);
@@ -45,7 +45,7 @@ export const postTodo = async (todo) => {
 
 export const changeTodo = async (id, todo) => {
   try {
-    await axios.put(`http://54.180.85.55/api/detail/${id}`, todo, {
+    await axios.put(`http://13.124.200.126/api/detail/${id}`, todo, {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
@@ -56,7 +56,7 @@ export const changeTodo = async (id, todo) => {
 
 export const deleteTodo = async (id) => {
   try {
-    await axios.delete(`http://54.180.85.55/api/todo/${id}`, {
+    await axios.delete(`http://13.124.200.126/api/todo/${id}`, {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
@@ -67,7 +67,7 @@ export const deleteTodo = async (id) => {
 
 export const completeTodo = async (id) => {
   try {
-    await axios.patch(`http://54.180.85.55/api/todo/${id}`, {
+    await axios.patch(`http://13.124.200.126/api/todo/${id}`, {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
@@ -78,7 +78,7 @@ export const completeTodo = async (id) => {
 
 export const getCompleteTodos = async () => {
   try {
-    const response = await axios.get("http://54.180.85.55/api/", {
+    const response = await axios.get("http://13.124.200.126/api/", {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
     console.log(response.data["doneList"]);
@@ -91,7 +91,7 @@ export const getCompleteTodos = async () => {
 
 export const login = async (userInfo) => {
   try {
-    await axios.post("http://54.180.85.55/api/login", userInfo);
+    await axios.post("http://13.124.200.126/api/login", userInfo);
   } catch (error) {
     console.log("Login Error : ", error);
     throw error;
@@ -100,7 +100,7 @@ export const login = async (userInfo) => {
 
 export const logout = async () => {
   try {
-    await axios.post("http://54.180.85.55/api/logout", {
+    await axios.post("http://13.124.200.126/api/logout", {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
   } catch (error) {
@@ -111,7 +111,7 @@ export const logout = async () => {
 
 export const signUp = async (userInfo) => {
   try {
-    await axios.post("http://54.180.85.55/api/signup", userInfo);
+    await axios.post("http://13.124.200.126/api/signup", userInfo);
   } catch (error) {
     console.log("SingUp Error : ", error);
     throw error;
@@ -120,7 +120,7 @@ export const signUp = async (userInfo) => {
 
 export const getUserInfo = async () => {
   try {
-    const response = await axios.get("http://54.180.85.55/api/auth", {
+    const response = await axios.get("http://13.124.200.126/api/auth", {
       headers: { Authorization: document.cookie.split("=")[1] },
     });
     return response.data["userInfo"];
