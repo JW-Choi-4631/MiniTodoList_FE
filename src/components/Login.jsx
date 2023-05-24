@@ -71,7 +71,7 @@ function Login({
       <NoBackBtn onClick={signUpBtnClickHandler}>회원가입</NoBackBtn>
       <StyledBtn
         onClick={() => {
-          login.mutate({
+          login({
             email: userInfo.email,
             password: userInfo.password,
           });

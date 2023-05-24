@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 export const getTodos = async () => {
   try {
@@ -91,7 +91,9 @@ export const getCompleteTodos = async () => {
 
 export const login = async (userInfo) => {
   try {
-    await axios.post("http://13.124.200.126/api/login", userInfo);
+    await axios.post("http://13.124.200.126/api/login", userInfo, {
+      withCredentials: true,
+    });
   } catch (error) {
     console.log("Login Error : ", error);
     throw error;

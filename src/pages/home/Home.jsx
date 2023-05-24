@@ -53,14 +53,17 @@ function Home() {
   });
 
   // 로그인 관련 react query CUD(Create, Update, Delete)
-  const loginMutation = useMutation(login, {
-    onSuccess: async () => {
-      console.log("Login 되었습니다.");
-      setIsLoggedIn(true);
-      await queryClient.invalidateQueries(["todoList", "userInfo"]);
-      // getUserInfoMutation.mutate();
-    },
-  });
+  const { mutateAsync: loginMutation } = useMutation(
+    (userInfo) => login(userInfo),
+    {
+      onSuccess: async () => {
+        console.log("Login 되었습니다.");
+        setIsLoggedIn(true);
+        await queryClient.invalidateQueries(["todoList", "userInfo"]);
+        // getUserInfoMutation.mutate();
+      },
+    }
+  );
 
   const logoutMutation = useMutation(logout, {
     onSuccess: () => {
